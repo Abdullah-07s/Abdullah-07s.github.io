@@ -219,17 +219,63 @@ button, input { font: inherit; }
     transform: rotate(-3deg) scale(1.04);
 }
 
-.nav-links { display: flex; gap: 27px; }
+/* NAV LINKS — Uiverse.io by joe-watson-sbf, recolored/adapted */
 
-.nav-links a { position: relative; color: #9ca4a6; font-size: 12px; transition: .25s; }
+.nav-links { display: flex; gap: 4px; }
 
-.nav-links a::after {
-    content: ""; position: absolute; left: 0; bottom: -9px;
-    width: 0; height: 1px; background: var(--gold); transition: .3s;
+.nav-links a {
+    font-size: 12px;
+    background: transparent;
+    border: none;
+    padding: 0.9em 1.1em;
+    color: #9ca4a6;
+    position: relative;
+    transition: color 0.5s ease;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 0;
 }
 
-.nav-links a:hover, .nav-links a.active { color: var(--gold); }
-.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: var(--gold);
+    transition: 0.5s ease;
+    z-index: -1;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+    background-color: var(--gold);
+    transition: 0.4s ease;
+    z-index: -1;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #090a08;
+    transition-delay: 0.5s;
+}
+
+.nav-links a:hover::before,
+.nav-links a.active::before {
+    width: 100%;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    height: 100%;
+    transition-delay: 0.4s;
+}
 
 .nav-actions { display: flex; gap: 7px; }
 
