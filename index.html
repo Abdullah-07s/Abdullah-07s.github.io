@@ -8,26 +8,22 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
 
 <style>
 
 /* =========================================================
-   ROOT
+   VARIABLES
 ========================================================= */
 
 :root {
     --bg: #050607;
-    --bg2: #080a0c;
-    --card: #0c1013;
-    --card2: #101519;
+    --card: #0b0e10;
+    --card2: #101417;
+    --border: #242a2d;
 
-    --border: #252b2f;
-    --border-hover: #705717;
-
-    --text: #f4f3ed;
-    --muted: #8f989b;
+    --text: #f3f1e9;
+    --muted: #929a9c;
     --dim: #596165;
 
     --gold: #f2b51d;
@@ -36,9 +32,8 @@
 
     --cyan: #39d9ff;
     --green: #5ee28c;
-    --purple: #a98cff;
 
-    --radius: 12px;
+    --radius: 11px;
 }
 
 
@@ -65,17 +60,18 @@ body {
 
 body::before {
     content: "";
+
     position: fixed;
     inset: 0;
 
     background-image:
         linear-gradient(
-            rgba(255,255,255,.018) 1px,
+            rgba(255,255,255,.017) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255,255,255,.018) 1px,
+            rgba(255,255,255,.017) 1px,
             transparent 1px
         );
 
@@ -127,8 +123,7 @@ input {
 
 
 /* =========================================================
-   LOADING SCREEN
-   Based on Uiverse.io loader by Nadabasuony
+   LOADER
 ========================================================= */
 
 #loader-screen {
@@ -154,32 +149,29 @@ input {
 }
 
 .loader {
-    --loader-color: var(--gold);
-
     width: 70px;
     height: 70px;
 
     position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .loader .l {
     position: absolute;
+
+    left: 32px;
+    top: 0;
 
     width: 5px;
     height: 18px;
 
     border-radius: 5px;
 
-    background: var(--loader-color);
+    background: var(--gold);
 
     transform-origin: 50% 35px;
 
     animation:
-        loaderSpin 1.15s linear infinite;
+        loaderPulse 1.15s linear infinite;
 }
 
 .loader .l:nth-child(1) {
@@ -227,26 +219,17 @@ input {
     animation-delay: -1.04s;
 }
 
-@keyframes loaderSpin {
+@keyframes loaderPulse {
     0% {
         opacity: 1;
-        transform:
-            rotate(var(--rotation))
-            scaleY(1);
     }
 
     50% {
-        opacity: .18;
-        transform:
-            rotate(var(--rotation))
-            scaleY(.55);
+        opacity: .15;
     }
 
     100% {
         opacity: 1;
-        transform:
-            rotate(var(--rotation))
-            scaleY(1);
     }
 }
 
@@ -289,7 +272,6 @@ input {
     height: 100%;
 
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 }
@@ -314,10 +296,10 @@ input {
     width: 44px;
     height: 44px;
 
-    position: relative;
-
     display: grid;
     place-items: center;
+
+    position: relative;
 
     border:
         1px solid var(--gold-dark);
@@ -349,55 +331,40 @@ input {
     border-radius: 6px;
 }
 
-.logo-mark::after {
-    content: "";
-
-    position: absolute;
-
-    width: 18px;
-    height: 18px;
-
-    border:
-        1px solid rgba(242,181,29,.12);
-
-    transform: rotate(45deg);
-}
-
 .logo-svg {
     width: 31px;
     height: 31px;
 
     position: relative;
-
     z-index: 2;
 }
 
 .brand:hover .logo-mark {
+    transform:
+        rotate(-3deg)
+        scale(1.04);
+
     border-color: var(--gold);
 
     box-shadow:
         0 0 25px
-        rgba(242,181,29,.13);
-
-    transform:
-        rotate(-3deg)
-        scale(1.04);
+        rgba(242,181,29,.15);
 }
 
 
 /* =========================================================
-   NAV LINKS
+   NAVIGATION
 ========================================================= */
 
 .nav-links {
     display: flex;
-    gap: 27px;
+    gap: 32px;
 }
 
 .nav-links a {
     position: relative;
 
-    color: #9ca4a6;
+    color: #929a9c;
 
     font-size: 12px;
 
@@ -459,9 +426,7 @@ input {
 
 .social:hover {
     color: var(--gold);
-
-    border-color:
-        var(--gold-dark);
+    border-color: var(--gold-dark);
 
     transform:
         translateY(-2px);
@@ -469,7 +434,7 @@ input {
 
 
 /* =========================================================
-   MAIN / PAGE SYSTEM
+   PAGES
 ========================================================= */
 
 main {
@@ -482,7 +447,7 @@ main {
     min-height:
         calc(100vh - 76px);
 
-    padding: 90px 0;
+    padding: 85px 0;
 
     animation:
         pageIn .45s ease both;
@@ -495,24 +460,22 @@ main {
 @keyframes pageIn {
     from {
         opacity: 0;
-        transform:
-            translateY(18px);
+        transform: translateY(18px);
     }
 
     to {
         opacity: 1;
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 }
 
 
 /* =========================================================
-   HOME
+   HOME HERO
 ========================================================= */
 
 .hero {
-    min-height: 650px;
+    min-height: 600px;
 
     display: grid;
 
@@ -568,7 +531,7 @@ main {
 }
 
 .hero p {
-    max-width: 600px;
+    max-width: 590px;
 
     color: var(--muted);
 
@@ -600,16 +563,14 @@ main {
 }
 
 .btn:hover {
-    transform:
-        translateY(-3px);
-
-    border-color:
-        var(--gold-dark);
+    transform: translateY(-3px);
+    border-color: var(--gold-dark);
 }
 
 .btn.primary {
     background: var(--gold);
     color: #090a08;
+
     border-color: var(--gold);
 }
 
@@ -637,14 +598,15 @@ main {
 }
 
 @keyframes terminalFloat {
+
     0%,100% {
         transform: translateY(0);
     }
 
     50% {
-        transform:
-            translateY(-6px);
+        transform: translateY(-6px);
     }
+
 }
 
 .terminal-header {
@@ -696,7 +658,7 @@ main {
 }
 
 .terminal-body {
-    min-height: 370px;
+    min-height: 350px;
 
     padding: 25px;
 
@@ -734,7 +696,392 @@ main {
 
 
 /* =========================================================
-   SECTION HEADINGS
+   HOME LOWER CONTENT
+========================================================= */
+
+.home-section {
+    margin-top: 90px;
+}
+
+.section-heading {
+    margin-top: 8px;
+
+    font:
+        700 35px
+        "Space Grotesk",
+        sans-serif;
+
+    letter-spacing: -1px;
+}
+
+.section-description {
+    max-width: 700px;
+
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.2fr .8fr;
+
+    gap: 14px;
+
+    margin-top: 25px;
+}
+
+.about-card {
+    padding: 25px;
+
+    background: var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    transition: .3s;
+}
+
+.about-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold-dark);
+}
+
+.about-card p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.9;
+}
+
+.stat-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 8px;
+}
+
+.stat {
+    padding: 18px;
+
+    background: #090c0e;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+}
+
+.stat strong {
+    display: block;
+
+    color: var(--gold);
+
+    font:
+        700 25px
+        "Space Grotesk",
+        sans-serif;
+}
+
+.stat span {
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.skills-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.skill-category {
+    padding: 19px;
+
+    background: var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 9px;
+
+    transition: .3s;
+}
+
+.skill-category:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold-dark);
+}
+
+.skill-category h3 {
+    margin-bottom: 13px;
+
+    color: var(--gold);
+
+    font:
+        600 13px
+        "Space Grotesk",
+        sans-serif;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+.skill-list span {
+    padding:
+        5px 7px;
+
+    background: #111519;
+
+    border:
+        1px solid #252b2f;
+
+    border-radius: 4px;
+
+    color: #b9c0c0;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-section {
+    text-align: center;
+
+    padding-bottom: 50px;
+}
+
+.contact-section .section-heading {
+    font-size:
+        clamp(38px,5vw,58px);
+}
+
+.contact-section .section-heading span {
+    color: var(--gold);
+}
+
+.contact-description {
+    max-width: 580px;
+
+    margin:
+        13px auto 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   UIVERSE CONNECTION BUTTONS
+========================================================= */
+
+.connection-container {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 35px;
+}
+
+.radio-wrapper {
+    position: relative;
+}
+
+.radio-wrapper .input {
+    position: absolute;
+
+    opacity: 0;
+}
+
+.radio-wrapper .btn {
+    width: 180px;
+    height: 52px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: #0b0d0f;
+
+    border:
+        1px solid #292f32;
+
+    border-radius: 0;
+
+    color: #aeb5b5;
+
+    font:
+        11px
+        "Space Mono",
+        monospace;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    clip-path:
+        polygon(
+            0 0,
+            calc(100% - 10px) 0,
+            100% 10px,
+            100% 100%,
+            10px 100%,
+            0 calc(100% - 10px)
+        );
+
+    transition: .25s;
+}
+
+.radio-wrapper .btn::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--gold);
+
+    transition: .3s;
+}
+
+.radio-wrapper:hover .btn {
+    color: var(--gold);
+
+    border-color:
+        var(--gold-dark);
+
+    transform:
+        translateY(-4px);
+}
+
+.radio-wrapper:hover .btn::before {
+    width: 100%;
+}
+
+.btn__glitch {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--gold);
+
+    opacity: 0;
+}
+
+.radio-wrapper
+.input:checked
++ .btn {
+    background: var(--gold);
+
+    border-color: var(--gold);
+
+    color: #080908;
+
+    box-shadow:
+        0 0 30px
+        rgba(242,181,29,.14);
+}
+
+.radio-wrapper
+.input:checked
++ .btn
+.btn__glitch {
+    animation:
+        glitch .45s steps(2);
+}
+
+.number {
+    position: absolute;
+
+    right: 8px;
+    bottom: 5px;
+
+    color: #555d60;
+
+    font-size: 8px;
+}
+
+@keyframes glitch {
+
+    0% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    30% {
+        opacity: .8;
+        transform: translateX(8px);
+    }
+
+    60% {
+        opacity: .3;
+        transform: translateX(-4px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================================================
+   PAGE TITLES
 ========================================================= */
 
 .page-title {
@@ -762,259 +1109,6 @@ main {
 
 
 /* =========================================================
-   PROJECT SEARCH
-========================================================= */
-
-.search {
-    max-width: 750px;
-
-    margin:
-        32px auto 17px;
-
-    position: relative;
-}
-
-.search input {
-    width: 100%;
-    height: 48px;
-
-    padding:
-        0 45px 0 16px;
-
-    outline: none;
-
-    background: #0a0d0f;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 9px;
-
-    color: white;
-
-    font-size: 12px;
-
-    transition: .25s;
-}
-
-.search input:focus {
-    border-color:
-        var(--gold-dark);
-
-    box-shadow:
-        0 0 25px
-        rgba(242,181,29,.04);
-}
-
-.search-icon {
-    position: absolute;
-
-    right: 16px;
-    top: 14px;
-
-    color: var(--gold);
-}
-
-
-/* =========================================================
-   FILTERS
-========================================================= */
-
-.filters {
-    display: flex;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-
-    margin-bottom: 30px;
-}
-
-.filter {
-    border:
-        1px solid var(--border);
-
-    background: transparent;
-
-    color: #929a9c;
-
-    padding:
-        7px 15px;
-
-    border-radius: 999px;
-
-    font-size: 10px;
-
-    transition: .25s;
-}
-
-.filter:hover,
-.filter.active {
-    background: var(--gold);
-
-    border-color: var(--gold);
-
-    color: #080908;
-}
-
-
-/* =========================================================
-   PROJECT GRID
-========================================================= */
-
-.projects {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 14px;
-}
-
-.project-card {
-    position: relative;
-
-    min-height: 250px;
-
-    display: flex;
-    flex-direction: column;
-
-    padding: 21px;
-
-    background: var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 11px;
-
-    overflow: hidden;
-
-    transition:
-        transform .3s,
-        border-color .3s,
-        box-shadow .3s;
-}
-
-.project-card::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 0;
-    height: 2px;
-
-    background: var(--gold);
-
-    transition: .35s;
-}
-
-.project-card:hover {
-    transform:
-        translateY(-6px);
-
-    border-color:
-        var(--border-hover);
-
-    box-shadow:
-        0 20px 45px
-        rgba(0,0,0,.35);
-}
-
-.project-card:hover::before {
-    width: 100%;
-}
-
-.project-number {
-    position: absolute;
-
-    right: 18px;
-    top: 17px;
-
-    color: #343b3e;
-
-    font:
-        10px
-        "Space Mono",
-        monospace;
-}
-
-.project-category {
-    color: var(--gold);
-
-    font:
-        9px
-        "Space Mono",
-        monospace;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1px;
-}
-
-.project-card h2 {
-    margin:
-        9px 0 8px;
-
-    font:
-        600 18px
-        "Space Grotesk",
-        sans-serif;
-}
-
-.project-card p {
-    flex: 1;
-
-    color: var(--muted);
-
-    font-size: 11px;
-
-    line-height: 1.7;
-}
-
-.tags {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 5px;
-
-    margin:
-        15px 0;
-}
-
-.tags span {
-    padding:
-        5px 7px;
-
-    background: #111519;
-
-    border:
-        1px solid #252b2f;
-
-    border-radius: 4px;
-
-    color: #aeb5b5;
-
-    font-size: 8px;
-}
-
-.project-link {
-    color: var(--gold);
-
-    font:
-        10px
-        "Space Mono",
-        monospace;
-}
-
-
-/* =========================================================
    EXPERIENCE
 ========================================================= */
 
@@ -1029,7 +1123,7 @@ main {
     position: relative;
 
     padding:
-        22px 25px 32px 45px;
+        22px 25px 35px 45px;
 
     border-left:
         1px solid #303639;
@@ -1096,407 +1190,241 @@ main {
 
 
 /* =========================================================
-   SKILLS
+   PROJECT SEARCH
 ========================================================= */
 
-.skills-grid {
-    display: grid;
+.search {
+    max-width: 750px;
 
-    grid-template-columns:
-        repeat(2,1fr);
+    margin:
+        32px auto 17px;
 
-    gap: 14px;
-
-    margin-top: 35px;
+    position: relative;
 }
 
-.skill-category {
-    padding: 22px;
+.search input {
+    width: 100%;
+    height: 48px;
 
-    background: var(--card);
+    padding:
+        0 45px 0 16px;
+
+    outline: none;
+
+    background: #0a0d0f;
 
     border:
         1px solid var(--border);
 
-    border-radius: 10px;
+    border-radius: 9px;
 
-    transition: .3s;
+    color: white;
+
+    font-size: 12px;
 }
 
-.skill-category:hover {
-    transform:
-        translateY(-4px);
-
-    border-color:
-        var(--border-hover);
+.search input:focus {
+    border-color: var(--gold-dark);
 }
 
-.skill-category h2 {
-    margin-bottom: 15px;
+.search-icon {
+    position: absolute;
+
+    right: 16px;
+    top: 14px;
 
     color: var(--gold);
-
-    font:
-        600 14px
-        "Space Grotesk",
-        sans-serif;
 }
 
-.skill-list {
+
+/* =========================================================
+   PROJECT FILTERS
+========================================================= */
+
+.filters {
     display: flex;
+
+    justify-content: center;
 
     flex-wrap: wrap;
 
     gap: 7px;
+
+    margin-bottom: 30px;
 }
 
-.skill-list span {
-    padding:
-        6px 9px;
-
-    background: #111519;
-
+.filter {
     border:
-        1px solid #252b2f;
+        1px solid var(--border);
 
-    border-radius: 5px;
+    background: transparent;
 
-    color: #c2c8c8;
+    color: #929a9c;
 
-    font-size: 9px;
+    padding:
+        7px 15px;
 
-    transition: .2s;
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    transition: .25s;
 }
 
-.skill-list span:hover {
-    color: var(--gold);
+.filter:hover,
+.filter.active {
+    background: var(--gold);
 
-    border-color:
-        var(--gold-dark);
+    border-color: var(--gold);
 
-    transform:
-        translateY(-2px);
+    color: #080908;
 }
 
 
 /* =========================================================
-   ABOUT
+   PROJECTS
 ========================================================= */
 
-.about-grid {
+.projects {
     display: grid;
 
     grid-template-columns:
-        1.2fr .8fr;
+        repeat(3,1fr);
 
-    gap: 15px;
-
-    margin-top: 35px;
+    gap: 14px;
 }
 
-.about-card {
-    padding: 25px;
+.project-card {
+    position: relative;
+
+    min-height: 250px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 21px;
 
     background: var(--card);
 
     border:
         1px solid var(--border);
 
-    border-radius: 10px;
-
-    transition: .3s;
-}
-
-.about-card:hover {
-    border-color:
-        var(--border-hover);
-
-    transform:
-        translateY(-4px);
-}
-
-.about-card p {
-    color: var(--muted);
-
-    font-size: 13px;
-
-    line-height: 1.9;
-}
-
-.stat-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap: 8px;
-}
-
-.stat {
-    padding: 18px;
-
-    background: #090c0e;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 8px;
-}
-
-.stat strong {
-    display: block;
-
-    color: var(--gold);
-
-    font:
-        700 25px
-        "Space Grotesk",
-        sans-serif;
-}
-
-.stat span {
-    color: var(--muted);
-
-    font-size: 9px;
-}
-
-
-/* =========================================================
-   CONNECT
-========================================================= */
-
-.connect-page {
-    min-height:
-        calc(100vh - 76px);
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-
-.connect-title {
-    margin-top: 10px;
-
-    font:
-        700 clamp(42px,6vw,72px)/1
-        "Space Grotesk",
-        sans-serif;
-
-    letter-spacing: -4px;
-}
-
-.connect-title span {
-    color: var(--gold);
-}
-
-.connect-description {
-    max-width: 590px;
-
-    margin:
-        20px auto 0;
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-    line-height: 1.8;
-}
-
-
-/* =========================================================
-   UIVERSE-STYLE CONNECT BUTTONS
-========================================================= */
-
-.connect-buttons {
-    display: flex;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 14px;
-
-    margin-top: 45px;
-}
-
-.radio-wrapper {
-    position: relative;
-
-    height: 55px;
-}
-
-.radio-wrapper .input {
-    position: absolute;
-
-    opacity: 0;
-}
-
-.glitch-btn {
-    width: 190px;
-    height: 55px;
-
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #0b0d0f;
-
-    border:
-        1px solid #292f32;
-
-    color: #aeb5b5;
-
-    font:
-        11px
-        "Space Mono",
-        monospace;
-
-    cursor: pointer;
+    border-radius: 11px;
 
     overflow: hidden;
 
-    clip-path:
-        polygon(
-            0 0,
-            calc(100% - 10px) 0,
-            100% 10px,
-            100% 100%,
-            10px 100%,
-            0 calc(100% - 10px)
-        );
-
-    transition: .25s;
+    transition:
+        transform .3s,
+        border-color .3s,
+        box-shadow .3s;
 }
 
-.glitch-btn::before {
+.project-card::before {
     content: "";
 
     position: absolute;
 
     left: 0;
-    bottom: 0;
+    top: 0;
 
     width: 0;
     height: 2px;
 
     background: var(--gold);
 
-    transition: .3s;
+    transition: .35s;
 }
 
-.glitch-btn:hover {
-    color: var(--gold);
+.project-card:hover {
+    transform: translateY(-6px);
 
-    border-color:
-        var(--gold-dark);
+    border-color: var(--gold-dark);
 
-    transform:
-        translateY(-4px);
+    box-shadow:
+        0 20px 45px
+        rgba(0,0,0,.35);
 }
 
-.glitch-btn:hover::before {
+.project-card:hover::before {
     width: 100%;
 }
 
-.glitch-text {
+.project-number {
     position: absolute;
 
-    inset: 0;
+    right: 18px;
+    top: 17px;
 
-    display: flex;
+    color: #343b3e;
 
-    align-items: center;
-    justify-content: center;
+    font:
+        10px
+        "Space Mono",
+        monospace;
+}
 
+.project-category {
     color: var(--gold);
 
-    opacity: 0;
+    font:
+        9px
+        "Space Mono",
+        monospace;
+
+    text-transform: uppercase;
 }
 
-.radio-wrapper
-.input:checked
-+ .glitch-btn {
-    background: var(--gold);
+.project-card h2 {
+    margin:
+        9px 0 8px;
 
-    border-color: var(--gold);
-
-    color: #080908;
-
-    box-shadow:
-        0 0 28px
-        rgba(242,181,29,.12);
+    font:
+        600 18px
+        "Space Grotesk",
+        sans-serif;
 }
 
-.radio-wrapper
-.input:checked
-+ .glitch-btn
-.glitch-text {
-    animation:
-        glitch .4s steps(2);
+.project-card p {
+    flex: 1;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.7;
 }
 
-@keyframes glitch {
-    0% {
-        opacity: 0;
-        transform: translateX(-10px);
-    }
+.tags {
+    display: flex;
 
-    30% {
-        opacity: .8;
-        transform: translateX(8px);
-    }
+    flex-wrap: wrap;
 
-    60% {
-        opacity: .3;
-        transform: translateX(-4px);
-    }
+    gap: 5px;
 
-    100% {
-        opacity: 0;
-        transform: translateX(0);
-    }
+    margin:
+        15px 0;
 }
 
-.button-number {
-    position: absolute;
+.tags span {
+    padding:
+        5px 7px;
 
-    right: 9px;
-    bottom: 5px;
+    background: #111519;
 
-    color: #555d60;
+    border:
+        1px solid #252b2f;
+
+    border-radius: 4px;
+
+    color: #aeb5b5;
 
     font-size: 8px;
 }
 
-.connect-output {
-    max-width: 600px;
-
-    min-height: 48px;
-
-    margin:
-        35px auto 0;
-
-    padding: 15px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #080a0c;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 8px;
-
-    color: #727b7e;
+.project-link {
+    color: var(--gold);
 
     font:
         10px
@@ -1545,10 +1473,15 @@ main {
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:1000px) {
+@media(max-width:1050px) {
 
     .hero {
         grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
     .projects {
@@ -1569,6 +1502,10 @@ main {
         display: none;
     }
 
+    .brand span {
+        display: none;
+    }
+
     .hero {
         min-height: auto;
     }
@@ -1578,12 +1515,9 @@ main {
         letter-spacing: -3px;
     }
 
-    .projects {
-        grid-template-columns: 1fr;
-    }
-
     .skills-grid,
-    .about-grid {
+    .about-grid,
+    .projects {
         grid-template-columns: 1fr;
     }
 
@@ -1591,34 +1525,13 @@ main {
         font-size: 34px;
     }
 
-    .connect-buttons {
+    .connection-container {
         flex-direction: column;
         align-items: center;
     }
 
     .page-indicator {
         display: none;
-    }
-
-    .brand span {
-        display: none;
-    }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
     }
 
 }
@@ -1631,7 +1544,7 @@ main {
 
 
 <!-- =========================================================
-     LOADER
+     LOADING SCREEN
 ========================================================= -->
 
 <div id="loader-screen">
@@ -1654,7 +1567,7 @@ main {
 
 
 <!-- =========================================================
-     NAVIGATION
+     NAVBAR
 ========================================================= -->
 
 <nav class="navbar">
@@ -1669,8 +1582,6 @@ main {
 >
 
     <div class="logo-mark">
-
-        <!-- Custom AM SVG logo -->
 
         <svg
             class="logo-svg"
@@ -1713,6 +1624,8 @@ main {
 </a>
 
 
+<!-- ONLY THREE MAIN TABS -->
+
 <div class="nav-links">
 
     <a
@@ -1724,13 +1637,6 @@ main {
     </a>
 
     <a
-        href="#projects"
-        data-page="projects"
-    >
-        Projects
-    </a>
-
-    <a
         href="#experience"
         data-page="experience"
     >
@@ -1738,24 +1644,10 @@ main {
     </a>
 
     <a
-        href="#skills"
-        data-page="skills"
+        href="#projects"
+        data-page="projects"
     >
-        Skills
-    </a>
-
-    <a
-        href="#about"
-        data-page="about"
-    >
-        About
-    </a>
-
-    <a
-        href="#connect"
-        data-page="connect"
-    >
-        Connect
+        Projects
     </a>
 
 </div>
@@ -1795,6 +1687,7 @@ main {
 
 <!-- =========================================================
      HOME
+     ABOUT + SKILLS + CONTACT ALL HERE
 ========================================================= -->
 
 <section
@@ -1802,7 +1695,12 @@ main {
     class="page active"
 >
 
-<div class="container hero">
+<div class="container">
+
+
+<!-- HERO -->
+
+<div class="hero">
 
 
 <div>
@@ -1845,11 +1743,11 @@ main {
         </a>
 
         <a
-            href="https://github.com/Abdullah-07s"
-            target="_blank"
+            href="#experience"
+            data-page="experience"
             class="btn"
         >
-            GitHub ↗
+            Experience
         </a>
 
     </div>
@@ -1910,11 +1808,11 @@ main {
         <br>
 
         <p>
-            <b>&gt; projects --count</b>
+            <b>&gt; github --projects</b>
         </p>
 
         <p class="success">
-            26 GitHub projects + CV projects
+            26+ projects
         </p>
 
         <br>
@@ -1937,111 +1835,411 @@ main {
 
 
 </div>
-</section>
 
 
 <!-- =========================================================
-     PROJECTS
+     ABOUT
 ========================================================= -->
 
-<section
-    id="projects"
-    class="page"
->
-
-<div class="container">
+<div class="home-section">
 
     <div class="section-label">
-        ✦ PROJECT ARCHIVE
+        ◉ ABOUT
     </div>
 
-    <h1 class="page-title">
-        Things I've Built
-    </h1>
+    <h2 class="section-heading">
+        Beyond The Code
+    </h2>
 
-    <p class="page-description">
-        My GitHub portfolio contains projects spanning
-        backend engineering, AI/ML, data, systems,
-        games and full-stack development.
+    <p class="section-description">
+        A little about who I am, what I build and
+        what drives my engineering work.
     </p>
 
 
-    <div class="search">
-
-        <input
-            id="projectSearch"
-            type="text"
-            placeholder="Search projects..."
-        >
-
-        <span class="search-icon">
-            ⌕
-        </span>
-
-    </div>
+    <div class="about-grid">
 
 
-    <div
-        class="filters"
-        id="filters"
-    >
+        <div class="about-card">
 
-        <button
-            class="filter active"
-            data-category="all"
-        >
-            All
-        </button>
+            <p>
+                I'm Abdullah Mallick, a Computer Science
+                student and software engineer focused on
+                building practical software and learning
+                through hands-on projects.
+            </p>
 
-        <button
-            class="filter"
-            data-category="backend"
-        >
-            Backend
-        </button>
+            <br>
 
-        <button
-            class="filter"
-            data-category="fullstack"
-        >
-            Full Stack
-        </button>
+            <p>
+                My portfolio spans backend engineering,
+                AI/ML, big data, distributed systems,
+                blockchain, application development,
+                computer systems and games.
+            </p>
 
-        <button
-            class="filter"
-            data-category="ai"
-        >
-            AI / ML
-        </button>
+            <br>
 
-        <button
-            class="filter"
-            data-category="data"
-        >
-            Data
-        </button>
+            <p>
+                I enjoy taking an idea, designing the system
+                behind it and turning it into something
+                that actually works.
+            </p>
 
-        <button
-            class="filter"
-            data-category="systems"
-        >
-            Systems
-        </button>
+        </div>
 
-        <button
-            class="filter"
-            data-category="games"
-        >
-            Games
-        </button>
+
+        <div class="about-card">
+
+            <div class="stat-grid">
+
+                <div class="stat">
+                    <strong>26+</strong>
+                    <span>GitHub Projects</span>
+                </div>
+
+                <div class="stat">
+                    <strong>9+</strong>
+                    <span>Languages</span>
+                </div>
+
+                <div class="stat">
+                    <strong>8+</strong>
+                    <span>Engineering Areas</span>
+                </div>
+
+                <div class="stat">
+                    <strong>∞</strong>
+                    <span>Things To Build</span>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
+</div>
 
-    <div
-        class="projects"
-        id="projectGrid"
-    ></div>
+
+<!-- =========================================================
+     SKILLS
+========================================================= -->
+
+<div class="home-section">
+
+    <div class="section-label">
+        &lt;/&gt; SKILLS
+    </div>
+
+    <h2 class="section-heading">
+        Engineering Stack
+    </h2>
+
+    <p class="section-description">
+        Technologies and engineering areas represented
+        throughout my projects and development work.
+    </p>
+
+
+    <div class="skills-grid">
+
+
+        <div class="skill-category">
+
+            <h3>
+                Languages
+            </h3>
+
+            <div class="skill-list">
+
+                <span>Java</span>
+                <span>Python</span>
+                <span>C++</span>
+                <span>C</span>
+                <span>JavaScript</span>
+                <span>SQL</span>
+                <span>Solidity</span>
+                <span>R</span>
+                <span>x86 Assembly</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <h3>
+                Backend
+            </h3>
+
+            <div class="skill-list">
+
+                <span>Spring Boot</span>
+                <span>Spring MVC</span>
+                <span>Spring Data JPA</span>
+                <span>WebFlux</span>
+                <span>R2DBC</span>
+                <span>REST APIs</span>
+                <span>JWT</span>
+                <span>Hibernate</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <h3>
+                Databases
+            </h3>
+
+            <div class="skill-list">
+
+                <span>MySQL</span>
+                <span>PostgreSQL</span>
+                <span>MongoDB</span>
+                <span>SQLite</span>
+                <span>JPA</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <h3>
+                Frontend
+            </h3>
+
+            <div class="skill-list">
+
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>Thymeleaf</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <h3>
+                AI / ML
+            </h3>
+
+            <div class="skill-list">
+
+                <span>Machine Learning</span>
+                <span>Deep Learning</span>
+                <span>RAG</span>
+                <span>LangChain</span>
+                <span>FastAPI</span>
+                <span>Embeddings</span>
+                <span>ChromaDB</span>
+                <span>Bayesian Modeling</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <h3>
+                Data / Big Data
+            </h3>
+
+            <div class="skill-list">
+
+                <span>Kafka</span>
+                <span>Big Data</span>
+                <span>Data Analysis</span>
+                <span>Data Processing</span>
+                <span>Event Streaming</span>
+                <span>Distributed Systems</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <h3>
+                DevOps
+            </h3>
+
+            <div class="skill-list">
+
+                <span>Docker</span>
+                <span>Git</span>
+                <span>GitHub</span>
+                <span>GitHub Actions</span>
+                <span>AWS</span>
+                <span>Linux</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-category">
+
+            <h3>
+                Other
+            </h3>
+
+            <div class="skill-list">
+
+                <span>Blockchain</span>
+                <span>Networking</span>
+                <span>Compilers</span>
+                <span>Concurrency</span>
+                <span>Algorithms</span>
+                <span>Data Structures</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<div class="home-section contact-section">
+
+    <div class="section-label">
+        // ESTABLISH CONNECTION
+    </div>
+
+    <h2 class="section-heading">
+        Let's <span>Connect.</span>
+    </h2>
+
+    <p class="contact-description">
+        Interested in software engineering, collaboration,
+        projects or technology? Choose a channel below.
+    </p>
+
+
+    <!-- EXACT UIVERSE STRUCTURE -->
+
+    <div class="connection-container">
+
+
+        <!-- GITHUB -->
+
+        <div class="radio-wrapper">
+
+            <input
+                class="input"
+                name="btn"
+                id="value-1"
+                type="radio"
+            >
+
+            <div class="btn">
+
+                <span aria-hidden="">
+                    _
+                </span>
+
+                GitHub
+
+                <span
+                    class="btn__glitch"
+                    aria-hidden=""
+                >
+                    _GitHub_
+                </span>
+
+                <label class="number">
+                    r1
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- LINKEDIN -->
+
+        <div class="radio-wrapper">
+
+            <input
+                class="input"
+                name="btn"
+                id="value-2"
+                type="radio"
+            >
+
+            <div class="btn">
+
+                _LinkedIn
+
+                <span
+                    class="btn__glitch"
+                    aria-hidden=""
+                >
+                    _L_i_n_k_e_d_I_n_
+                </span>
+
+                <label class="number">
+                    r2
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="radio-wrapper">
+
+            <input
+                class="input"
+                name="btn"
+                id="value-3"
+                type="radio"
+            >
+
+            <div class="btn">
+
+                Email
+
+                <span
+                    class="btn__glitch"
+                    aria-hidden=""
+                >
+                    _E_m_a_i_l_
+                </span>
+
+                <label class="number">
+                    r3
+                </label>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
 
 </div>
 
@@ -2049,7 +2247,7 @@ main {
 
 
 <!-- =========================================================
-     EXPERIENCE
+     EXPERIENCE TAB
 ========================================================= -->
 
 <section
@@ -2060,12 +2258,17 @@ main {
 <div class="container">
 
     <div class="section-label">
-        ▣ EXPERIENCE &amp; EDUCATION
+        ▣ EXPERIENCE
     </div>
 
     <h1 class="page-title">
-        My Journey
+        Experience &amp; Education
     </h1>
+
+    <p class="page-description">
+        My academic background, professional experience
+        and engineering journey.
+    </p>
 
 
     <div class="timeline">
@@ -2132,21 +2335,22 @@ main {
             </div>
 
             <h2>
-                Independent Software Projects
+                Independent Software Development
             </h2>
 
             <h3>
-                Software Engineering · AI/ML · Systems
+                Personal Projects
             </h3>
 
             <p>
-                Building and maintaining a growing portfolio
-                of software projects across backend systems,
-                AI/ML, data engineering, blockchain,
-                applications and games.
+                Building a growing portfolio of applications
+                across backend engineering, AI/ML, big data,
+                distributed systems, blockchain, games and
+                full-stack development.
             </p>
 
         </div>
+
 
     </div>
 
@@ -2156,448 +2360,104 @@ main {
 
 
 <!-- =========================================================
-     SKILLS
+     PROJECTS TAB
 ========================================================= -->
 
 <section
-    id="skills"
+    id="projects"
     class="page"
 >
 
 <div class="container">
 
     <div class="section-label">
-        &lt;/&gt; ENGINEERING STACK
+        ✦ PROJECT ARCHIVE
     </div>
 
     <h1 class="page-title">
-        Skills &amp; Technologies
+        Things I've Built
     </h1>
 
     <p class="page-description">
-        Technologies and engineering areas represented
-        across my CV and project portfolio.
+        Explore my GitHub projects across backend
+        engineering, AI/ML, data, systems, games
+        and full-stack development.
     </p>
 
 
-    <div class="skills-grid">
+    <div class="search">
 
+        <input
+            id="projectSearch"
+            type="text"
+            placeholder="Search projects..."
+        >
 
-        <div class="skill-category">
-
-            <h2>
-                Programming Languages
-            </h2>
-
-            <div class="skill-list">
-
-                <span>Java</span>
-                <span>Python</span>
-                <span>C++</span>
-                <span>C</span>
-                <span>JavaScript</span>
-                <span>SQL</span>
-                <span>Solidity</span>
-                <span>x86 Assembly</span>
-                <span>R</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-category">
-
-            <h2>
-                Java / Backend
-            </h2>
-
-            <div class="skill-list">
-
-                <span>Spring Boot</span>
-                <span>Spring MVC</span>
-                <span>Spring Data JPA</span>
-                <span>Spring WebFlux</span>
-                <span>R2DBC</span>
-                <span>REST APIs</span>
-                <span>JWT</span>
-                <span>Hibernate</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-category">
-
-            <h2>
-                Databases
-            </h2>
-
-            <div class="skill-list">
-
-                <span>MySQL</span>
-                <span>PostgreSQL</span>
-                <span>MongoDB</span>
-                <span>SQLite</span>
-                <span>JPA</span>
-                <span>R2DBC</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-category">
-
-            <h2>
-                Frontend
-            </h2>
-
-            <div class="skill-list">
-
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>React</span>
-                <span>Thymeleaf</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-category">
-
-            <h2>
-                AI / Machine Learning
-            </h2>
-
-            <div class="skill-list">
-
-                <span>Machine Learning</span>
-                <span>Deep Learning</span>
-                <span>RAG</span>
-                <span>LangChain</span>
-                <span>FastAPI</span>
-                <span>Embeddings</span>
-                <span>Vector Search</span>
-                <span>ChromaDB</span>
-                <span>Bayesian Modeling</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-category">
-
-            <h2>
-                Data / Big Data
-            </h2>
-
-            <div class="skill-list">
-
-                <span>Data Analysis</span>
-                <span>Data Processing</span>
-                <span>Big Data</span>
-                <span>Kafka</span>
-                <span>Event Streaming</span>
-                <span>Distributed Systems</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-category">
-
-            <h2>
-                DevOps / Infrastructure
-            </h2>
-
-            <div class="skill-list">
-
-                <span>Docker</span>
-                <span>Git</span>
-                <span>GitHub</span>
-                <span>GitHub Actions</span>
-                <span>AWS</span>
-                <span>Linux</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="skill-category">
-
-            <h2>
-                Other Technologies
-            </h2>
-
-            <div class="skill-list">
-
-                <span>Blockchain</span>
-                <span>Solidity</span>
-                <span>Networking</span>
-                <span>Compiler Construction</span>
-                <span>Concurrency</span>
-                <span>Algorithms</span>
-                <span>Data Structures</span>
-
-            </div>
-
-        </div>
+        <span class="search-icon">
+            ⌕
+        </span>
 
     </div>
 
-</div>
 
-</section>
+    <div class="filters">
 
+        <button
+            class="filter active"
+            data-category="all"
+        >
+            All
+        </button>
 
-<!-- =========================================================
-     ABOUT
-========================================================= -->
+        <button
+            class="filter"
+            data-category="backend"
+        >
+            Backend
+        </button>
 
-<section
-    id="about"
-    class="page"
->
+        <button
+            class="filter"
+            data-category="fullstack"
+        >
+            Full Stack
+        </button>
 
-<div class="container">
+        <button
+            class="filter"
+            data-category="ai"
+        >
+            AI / ML
+        </button>
 
-    <div class="section-label">
-        ◉ ABOUT ME
-    </div>
+        <button
+            class="filter"
+            data-category="data"
+        >
+            Data
+        </button>
 
-    <h1 class="page-title">
-        Beyond The Code
-    </h1>
+        <button
+            class="filter"
+            data-category="systems"
+        >
+            Systems
+        </button>
 
-
-    <div class="about-grid">
-
-
-        <div class="about-card">
-
-            <p>
-                I'm Abdullah Mallick, a Computer Science
-                student and software engineer focused on
-                building practical software and learning
-                through hands-on projects.
-            </p>
-
-            <br>
-
-            <p>
-                My portfolio covers backend engineering,
-                AI/ML, big data, distributed systems,
-                blockchain, application development,
-                computer systems and games.
-            </p>
-
-            <br>
-
-            <p>
-                I enjoy taking an idea, designing the system
-                behind it and turning it into something that
-                actually works.
-            </p>
-
-        </div>
-
-
-        <div class="about-card">
-
-            <div class="stat-grid">
-
-                <div class="stat">
-                    <strong>26</strong>
-                    <span>GitHub Projects</span>
-                </div>
-
-                <div class="stat">
-                    <strong>9+</strong>
-                    <span>Languages</span>
-                </div>
-
-                <div class="stat">
-                    <strong>8+</strong>
-                    <span>Engineering Areas</span>
-                </div>
-
-                <div class="stat">
-                    <strong>∞</strong>
-                    <span>Things To Build</span>
-                </div>
-
-            </div>
-
-        </div>
+        <button
+            class="filter"
+            data-category="games"
+        >
+            Games
+        </button>
 
     </div>
 
-</div>
 
-</section>
-
-
-<!-- =========================================================
-     CONNECT
-========================================================= -->
-
-<section
-    id="connect"
-    class="page"
->
-
-<div class="connect-page">
-
-<div class="container">
-
-<div class="connect-page">
-
-
-<div>
-
-
-<div class="section-label">
-    // ESTABLISH CONNECTION
-</div>
-
-
-<h1 class="connect-title">
-    Let's
-    <span>Connect.</span>
-</h1>
-
-
-<p class="connect-description">
-    Interested in software engineering, collaboration,
-    projects or technology? Pick a channel below.
-</p>
-
-
-<div class="connect-buttons">
-
-
-<!-- GITHUB -->
-
-<div class="radio-wrapper">
-
-<input
-    class="input"
-    name="btn"
-    id="value-1"
-    type="radio"
->
-
-<label
-    class="glitch-btn"
-    for="value-1"
->
-
-    <span>
-        _GitHub
-    </span>
-
-    <span class="glitch-text">
-        _G_i_t_H_u_b_
-    </span>
-
-    <span class="button-number">
-        r1
-    </span>
-
-</label>
-
-</div>
-
-
-<!-- LINKEDIN -->
-
-<div class="radio-wrapper">
-
-<input
-    class="input"
-    name="btn"
-    id="value-2"
-    type="radio"
->
-
-<label
-    class="glitch-btn"
-    for="value-2"
->
-
-    <span>
-        _LinkedIn
-    </span>
-
-    <span class="glitch-text">
-        _L_i_n_k_e_d_I_n_
-    </span>
-
-    <span class="button-number">
-        r2
-    </span>
-
-</label>
-
-</div>
-
-
-<!-- EMAIL -->
-
-<div class="radio-wrapper">
-
-<input
-    class="input"
-    name="btn"
-    id="value-3"
-    type="radio"
->
-
-<label
-    class="glitch-btn"
-    for="value-3"
->
-
-    <span>
-        _Email
-    </span>
-
-    <span class="glitch-text">
-        _E_m_a_i_l_
-    </span>
-
-    <span class="button-number">
-        r3
-    </span>
-
-</label>
-
-</div>
-
-
-</div>
-
-
-<div
-    class="connect-output"
-    id="connectOutput"
->
-    SELECT A CONNECTION CHANNEL
-</div>
-
-
-</div>
-
-</div>
-
-</div>
+    <div
+        class="projects"
+        id="projectGrid"
+    ></div>
 
 </div>
 
@@ -2627,23 +2487,30 @@ main {
    LOADER
 ========================================================= */
 
-window.addEventListener("load", () => {
+window.addEventListener(
+    "load",
+    () => {
 
-    setTimeout(() => {
+        setTimeout(
+            () => {
 
-        document
-            .getElementById("loader-screen")
-            .classList
-            .add("hidden");
+                document
+                    .getElementById(
+                        "loader-screen"
+                    )
+                    .classList
+                    .add("hidden");
 
-    }, 900);
+            },
+            900
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
    PROJECT DATABASE
-   26 PUBLIC GITHUB PROJECTS
 ========================================================= */
 
 const projects = [
@@ -2651,8 +2518,7 @@ const projects = [
     {
         name: "Titanic Survival",
         category: "ai",
-        description:
-            "Machine learning project focused on predicting passenger survival using structured historical data.",
+        description: "Machine learning project focused on predicting passenger survival using structured historical data.",
         tags: ["Python","Machine Learning","Data"],
         repo: "titanic-survival"
     },
@@ -2660,8 +2526,7 @@ const projects = [
     {
         name: "Campus API",
         category: "backend",
-        description:
-            "Backend API project for campus-oriented application functionality and structured service communication.",
+        description: "Backend API project for campus-oriented application functionality and structured service communication.",
         tags: ["Java","API","Backend"],
         repo: "campus-api"
     },
@@ -2669,17 +2534,15 @@ const projects = [
     {
         name: "CryptoTracker",
         category: "fullstack",
-        description:
-            "Cryptocurrency tracking application focused on retrieving and presenting market information.",
-        tags: ["Java","Spring","API","Crypto"],
+        description: "Cryptocurrency tracking application focused on retrieving and presenting market information.",
+        tags: ["Java","Spring","API"],
         repo: "CryptoTracker"
     },
 
     {
         name: "LMS",
         category: "fullstack",
-        description:
-            "Learning management system covering core academic and course-management functionality.",
+        description: "Learning management system covering core academic and course-management functionality.",
         tags: ["Java","Web","Database"],
         repo: "LMS"
     },
@@ -2687,17 +2550,15 @@ const projects = [
     {
         name: "Cache Simulator",
         category: "systems",
-        description:
-            "Computer architecture project simulating cache behaviour and memory-access concepts.",
-        tags: ["C++","Systems","Computer Architecture"],
+        description: "Computer architecture project simulating cache behaviour and memory-access concepts.",
+        tags: ["C++","Systems","Architecture"],
         repo: "cache-simulator"
     },
 
     {
         name: "AppyFlow",
         category: "fullstack",
-        description:
-            "Application-focused project exploring structured workflows and modern application development.",
+        description: "Application-focused project exploring structured workflows and modern application development.",
         tags: ["Java","Application","Backend"],
         repo: "AppyFlow"
     },
@@ -2705,8 +2566,7 @@ const projects = [
     {
         name: "Compiler Construction",
         category: "systems",
-        description:
-            "Compiler construction project exploring language processing and compiler fundamentals.",
+        description: "Compiler construction project exploring language processing and compiler fundamentals.",
         tags: ["C++","Compiler","Parsing"],
         repo: "compiler-construction"
     },
@@ -2714,8 +2574,7 @@ const projects = [
     {
         name: "Jellyfin Server",
         category: "systems",
-        description:
-            "Self-hosted media-server related project focused on media infrastructure and server deployment.",
+        description: "Self-hosted media-server related project focused on media infrastructure and server deployment.",
         tags: ["Server","Media","Infrastructure"],
         repo: "jellyfin-server"
     },
@@ -2723,8 +2582,7 @@ const projects = [
     {
         name: "Library Management System",
         category: "fullstack",
-        description:
-            "Library management application handling books, users and library operations.",
+        description: "Library management application handling books, users and library operations.",
         tags: ["Java","Database","CRUD"],
         repo: "library-management-system"
     },
@@ -2732,8 +2590,7 @@ const projects = [
     {
         name: "Traffic Control System",
         category: "systems",
-        description:
-            "Traffic-control simulation project exploring system logic, coordination and control flows.",
+        description: "Traffic-control simulation exploring system logic, coordination and control flows.",
         tags: ["C++","Simulation","Systems"],
         repo: "traffic-control-system"
     },
@@ -2741,8 +2598,7 @@ const projects = [
     {
         name: "Helix Banking",
         category: "backend",
-        description:
-            "Banking application focused on financial workflows, account operations and backend architecture.",
+        description: "Banking application focused on financial workflows, account operations and backend architecture.",
         tags: ["Java","Spring Boot","Banking"],
         repo: "Helix-Banking"
     },
@@ -2750,8 +2606,7 @@ const projects = [
     {
         name: "Nexo Expense Tracker",
         category: "fullstack",
-        description:
-            "Expense tracking application with financial categorisation and application-level data management.",
+        description: "Expense tracking application with financial categorisation and application-level data management.",
         tags: ["Java","Spring Boot","MySQL"],
         repo: "Nexo-Expense-Tracker"
     },
@@ -2759,8 +2614,7 @@ const projects = [
     {
         name: "CivicPulse",
         category: "fullstack",
-        description:
-            "Civic-service application focused on structured public-service interactions and request workflows.",
+        description: "Civic-service application focused on structured public-service interactions and request workflows.",
         tags: ["Java","Spring Boot","JWT"],
         repo: "CivicPulse"
     },
@@ -2768,8 +2622,7 @@ const projects = [
     {
         name: "Predictive Modeling",
         category: "ai",
-        description:
-            "Predictive analytics project exploring statistical and machine-learning modelling techniques.",
+        description: "Predictive analytics project exploring statistical and machine-learning modelling techniques.",
         tags: ["Python","R","Machine Learning"],
         repo: "predictive-modeling"
     },
@@ -2777,8 +2630,7 @@ const projects = [
     {
         name: "Grocery Store App",
         category: "fullstack",
-        description:
-            "Grocery shopping application covering products, shopping workflows and data management.",
+        description: "Grocery shopping application covering products, shopping workflows and data management.",
         tags: ["Java","Web","Database"],
         repo: "grocery-store-app"
     },
@@ -2786,26 +2638,23 @@ const projects = [
     {
         name: "Crime Analytics",
         category: "ai",
-        description:
-            "Crime-data analytics project exploring patterns, analysis and predictive modelling.",
-        tags: ["Python","Data","Machine Learning"],
+        description: "Crime-data analytics project exploring patterns, analysis and predictive modelling.",
+        tags: ["Python","Data","ML"],
         repo: "Crime-Analytics"
     },
 
     {
         name: "Zuma Game",
         category: "games",
-        description:
-            "Game development project implementing gameplay mechanics, interaction and game logic.",
-        tags: ["C++","Game Development","Logic"],
+        description: "Game development project implementing gameplay mechanics, interaction and game logic.",
+        tags: ["C++","Game Development"],
         repo: "Zuma-Game"
     },
 
     {
         name: "Kafka Event Streaming",
         category: "data",
-        description:
-            "Event-driven project exploring Kafka-based messaging, streaming and distributed communication.",
+        description: "Event-driven project exploring Kafka-based messaging, streaming and distributed communication.",
         tags: ["Kafka","Java","Streaming"],
         repo: "kafka-event-streaming"
     },
@@ -2813,8 +2662,7 @@ const projects = [
     {
         name: "Commerce Engine",
         category: "backend",
-        description:
-            "Commerce-oriented backend project focused on structured business logic and application services.",
+        description: "Commerce-oriented backend project focused on structured business logic and application services.",
         tags: ["Java","Backend","Database"],
         repo: "commerce-engine"
     },
@@ -2822,8 +2670,7 @@ const projects = [
     {
         name: "Concurrency Playground",
         category: "systems",
-        description:
-            "Hands-on exploration of concurrency, multithreading and synchronisation concepts.",
+        description: "Hands-on exploration of concurrency, multithreading and synchronisation concepts.",
         tags: ["Java","Concurrency","Threads"],
         repo: "concurrency-playground"
     },
@@ -2831,8 +2678,7 @@ const projects = [
     {
         name: "Weather Aggregator",
         category: "backend",
-        description:
-            "Weather aggregation application that combines external weather information through APIs.",
+        description: "Weather aggregation application combining external weather information through APIs.",
         tags: ["Java","REST API","Aggregation"],
         repo: "weather-aggregator"
     },
@@ -2840,8 +2686,7 @@ const projects = [
     {
         name: "Shopping App",
         category: "fullstack",
-        description:
-            "Shopping application exploring product browsing, application workflows and data persistence.",
+        description: "Shopping application exploring product browsing, application workflows and data persistence.",
         tags: ["Java","Web","Database"],
         repo: "shopping-app"
     },
@@ -2849,8 +2694,7 @@ const projects = [
     {
         name: "Ticket Booking Simulator",
         category: "systems",
-        description:
-            "Ticket-booking simulation focused on concurrency, booking workflows and resource management.",
+        description: "Ticket-booking simulation focused on concurrency, booking workflows and resource management.",
         tags: ["Java","Concurrency","Simulation"],
         repo: "ticket-booking-simulator"
     },
@@ -2858,8 +2702,7 @@ const projects = [
     {
         name: "Inventra Stock Management",
         category: "backend",
-        description:
-            "Inventory and stock-management application designed around structured product and warehouse workflows.",
+        description: "Inventory and stock-management application designed around structured product and warehouse workflows.",
         tags: ["Java","Spring Boot","MySQL"],
         repo: "Inventra-Stock-Management"
     },
@@ -2867,8 +2710,7 @@ const projects = [
     {
         name: "Space Shooter",
         category: "games",
-        description:
-            "Space-themed game project focused on gameplay mechanics, movement and interactive systems.",
+        description: "Space-themed game project focused on gameplay mechanics, movement and interactive systems.",
         tags: ["C++","Game Development","OOP"],
         repo: "space-shooter"
     },
@@ -2876,8 +2718,7 @@ const projects = [
     {
         name: "TORCS Racing AI",
         category: "ai",
-        description:
-            "AI project exploring autonomous racing behaviour and machine-learning concepts in TORCS.",
+        description: "AI project exploring autonomous racing behaviour and machine-learning concepts in TORCS.",
         tags: ["AI","Python","TORCS"],
         repo: "torcs-racing-AI"
     }
@@ -2886,7 +2727,7 @@ const projects = [
 
 
 /* =========================================================
-   RENDER PROJECTS
+   PROJECT RENDERING
 ========================================================= */
 
 const projectGrid =
@@ -2904,7 +2745,7 @@ let currentCategory = "all";
 
 function renderProjects() {
 
-    const term =
+    const search =
         projectSearch
             .value
             .toLowerCase()
@@ -2912,49 +2753,32 @@ function renderProjects() {
 
 
     const filtered =
-        projects.filter(project => {
+        projects.filter(
+            project => {
 
-            const categoryMatch =
-                currentCategory === "all" ||
-                project.category === currentCategory;
-
-
-            const searchText =
-                [
-                    project.name,
-                    project.description,
-                    project.category,
-                    ...project.tags
-                ]
-                .join(" ")
-                .toLowerCase();
+                const categoryMatch =
+                    currentCategory === "all" ||
+                    project.category === currentCategory;
 
 
-            return (
-                categoryMatch &&
-                searchText.includes(term)
-            );
+                const content =
+                    [
+                        project.name,
+                        project.description,
+                        project.category,
+                        ...project.tags
+                    ]
+                    .join(" ")
+                    .toLowerCase();
 
-        });
 
+                return (
+                    categoryMatch &&
+                    content.includes(search)
+                );
 
-    if (!filtered.length) {
-
-        projectGrid.innerHTML = `
-            <div
-                style="
-                    grid-column:1/-1;
-                    padding:50px;
-                    text-align:center;
-                    color:var(--muted);
-                "
-            >
-                No projects found.
-            </div>
-        `;
-
-        return;
-    }
+            }
+        );
 
 
     projectGrid.innerHTML =
@@ -3011,34 +2835,38 @@ function renderProjects() {
 
 document
     .querySelectorAll(".filter")
-    .forEach(button => {
+    .forEach(
+        button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                document
-                    .querySelectorAll(".filter")
-                    .forEach(
-                        b =>
-                        b.classList.remove(
-                            "active"
+                    document
+                        .querySelectorAll(
+                            ".filter"
                         )
+                        .forEach(
+                            b =>
+                            b.classList.remove(
+                                "active"
+                            )
+                        );
+
+                    button.classList.add(
+                        "active"
                     );
 
-                button.classList.add(
-                    "active"
-                );
+                    currentCategory =
+                        button.dataset.category;
 
-                currentCategory =
-                    button.dataset.category;
+                    renderProjects();
 
-                renderProjects();
+                }
+            );
 
-            }
-        );
-
-    });
+        }
+    );
 
 
 projectSearch.addEventListener(
@@ -3070,10 +2898,7 @@ const pageName =
     );
 
 
-function showPage(
-    page,
-    updateHash = true
-) {
+function showPage(page) {
 
     if (
         !document.getElementById(page)
@@ -3097,14 +2922,13 @@ function showPage(
         );
 
 
-    pageLinks.forEach(link => {
-
+    pageLinks.forEach(
+        link =>
         link.classList.toggle(
             "active",
             link.dataset.page === page
-        );
-
-    });
+        )
+    );
 
 
     pageName.textContent =
@@ -3117,60 +2941,50 @@ function showPage(
     });
 
 
-    if (updateHash) {
-
-        history.replaceState(
-            null,
-            "",
-            "#" + page
-        );
-
-    }
+    history.replaceState(
+        null,
+        "",
+        "#" + page
+    );
 
 }
 
 
-pageLinks.forEach(link => {
+pageLinks.forEach(
+    link => {
 
-    link.addEventListener(
-        "click",
-        event => {
+        link.addEventListener(
+            "click",
+            event => {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            showPage(
-                link.dataset.page
-            );
+                showPage(
+                    link.dataset.page
+                );
 
-        }
-    );
+            }
+        );
 
-});
+    }
+);
 
 
 const initialPage =
-    location.hash
-        .replace("#","");
+    location.hash.replace("#","");
 
 
 showPage(
-    initialPage &&
     document.getElementById(initialPage)
         ? initialPage
-        : "home",
-    false
+        : "home"
 );
 
 
 /* =========================================================
-   CONNECT BUTTONS
+   CONNECTION BUTTONS
+   GitHub / LinkedIn / Email
 ========================================================= */
-
-const output =
-    document.getElementById(
-        "connectOutput"
-    );
-
 
 document
     .getElementById("value-1")
@@ -3178,19 +2992,9 @@ document
         "change",
         () => {
 
-            output.textContent =
-                "Opening GitHub...";
-
-            setTimeout(
-                () => {
-
-                    window.open(
-                        "https://github.com/Abdullah-07s",
-                        "_blank"
-                    );
-
-                },
-                350
+            window.open(
+                "https://github.com/Abdullah-07s",
+                "_blank"
             );
 
         }
@@ -3203,19 +3007,9 @@ document
         "change",
         () => {
 
-            output.textContent =
-                "Opening LinkedIn...";
-
-            setTimeout(
-                () => {
-
-                    window.open(
-                        "https://www.linkedin.com/in/abdullah-mallick",
-                        "_blank"
-                    );
-
-                },
-                350
+            window.open(
+                "https://www.linkedin.com/in/abdullah-mallick",
+                "_blank"
             );
 
         }
@@ -3228,18 +3022,8 @@ document
         "change",
         () => {
 
-            output.textContent =
-                "Opening email client...";
-
-            setTimeout(
-                () => {
-
-                    window.location.href =
-                        "mailto:abdullah.mallickk@gmail.com";
-
-                },
-                350
-            );
+            window.location.href =
+                "mailto:abdullah.mallickk@gmail.com";
 
         }
     );
