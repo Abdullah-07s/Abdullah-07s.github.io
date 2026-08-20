@@ -626,53 +626,57 @@ main { padding-top: 76px; }
 .skill-list-active { margin-top: 24px; min-height: 60px; }
 
 
-/* LANGUAGE CARDS (Uiverse.io by Samalander0, recolored) */
+/* TECH STACK FLIP CARDS (Uiverse.io by suleymanlaarabidev, recolored) */
 
-.lang-wallet { margin-top: 34px; }
+.stack-cards { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 20px; }
 
-.lang-wallet-label { color: var(--gold); font: 600 10px "Space Mono", monospace; letter-spacing: 2px; }
-
-.lang-cards {
-    display: flex; flex-wrap: wrap; gap: 18px;
-    margin-top: 14px;
-}
-
-.lang-card {
+.stack-card {
     width: 190px;
+    height: 200px;
     background: var(--card2);
-    color: var(--text);
-    position: relative;
-    border-radius: 1.6em;
-    padding: 1.3em;
     border: 1px solid var(--border);
-    transition: transform .35s ease, border-color .35s ease;
+    transition: all .4s;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,.5);
+    font-size: 15px;
+    font-weight: 700;
+    overflow: hidden;
 }
 
-.lang-card .lc-content {
-    display: flex; flex-direction: column; justify-content: space-between;
-    gap: 3em; height: 100%; transition: transform .35s ease;
+.stack-card:hover {
+    border-radius: 15px;
+    cursor: pointer;
+    transform: scale(1.06);
+    box-shadow: 0px 0px 16px 4px rgba(242,181,29,.18);
+    background: var(--card);
+    border-color: var(--gold-dark);
 }
 
-.lang-card .lc-top, .lang-card .lc-bottom { display: flex; justify-content: space-between; }
-.lang-card .lc-top p, .lang-card .lc-title, .lang-card .lc-bottom p { margin: 0; }
-.lang-card .lc-title { font-weight: 700; color: var(--gold); font-family: "Space Mono", monospace; font-size: 12px; }
-.lang-card .lc-top p { font-weight: 700; font-family: "Space Grotesk", sans-serif; font-size: 15px; }
-.lang-card .lc-bottom { align-items: flex-end; }
-.lang-card .lc-bottom p { font-weight: 500; font-size: 10px; color: var(--muted); }
-
-.lang-card .lc-image {
-    position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-    display: grid; place-items: center; pointer-events: none; opacity: 0;
-    transition: opacity .35s ease;
+.stack-first {
+    height: 100%; width: 100%;
+    transition: all .4s;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; opacity: 1; border-radius: 15px; padding: 12px; text-align: center;
 }
 
-.lang-card .lc-image svg { width: 3em; height: 3em; color: var(--gold); transition: transform .4s ease; }
+.stack-first span { color: var(--gold); font: 700 15px "Space Grotesk", sans-serif; letter-spacing: .5px; }
+.stack-first small { color: var(--muted); font: 500 9px "Space Mono", monospace; letter-spacing: 1px; text-transform: uppercase; }
 
-.lang-card:hover { cursor: pointer; border-color: var(--gold-dark); transform: translateY(-4px); }
-.lang-card:hover .lc-content { opacity: .15; transform: scale(.96); }
-.lang-card:hover .lc-image { opacity: 1; }
-.lang-card:hover .lc-image svg { transform: scale(1.1) rotate(-6deg); }
-.lang-card:active { transform: scale(.96); }
+.stack-card:hover .stack-first { height: 0px; opacity: 0; }
+
+.stack-second {
+    height: 0%; width: 100%; opacity: 0;
+    display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+    gap: 6px; border-radius: 15px; transition: all .4s;
+    font-size: 0px; transform: rotate(90deg) scale(-1); padding: 14px;
+}
+
+.stack-card:hover .stack-second { opacity: 1; height: 100%; font-size: 1rem; transform: rotate(0deg); }
+
+.stack-second span {
+    padding: 4px 8px; background: #0d1114; border: 1px solid #252b2f;
+    border-radius: 5px; color: #c2c8c8; font-size: 9px; font-weight: 500;
+}
 
 
 /* ABOUT */
@@ -690,11 +694,49 @@ main { padding-top: 76px; }
 .about-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
 .about-card p { color: var(--muted); font-size: 13px; line-height: 1.9; }
 
-.stat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+.stat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
 
-.stat { padding: 18px; background: #090c0e; border: 1px solid var(--border); border-radius: 8px; }
-.stat strong { display: block; color: var(--gold); font: 700 25px "Space Grotesk", sans-serif; }
-.stat span { color: var(--muted); font-size: 9px; }
+/* STAT CARDS (Uiverse.io by bhaveshxrawat, recolored) */
+
+.stat {
+    width: 100%;
+    aspect-ratio: 190 / 168;
+    background: #0a0d0f;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.stat::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    background-image: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+    height: 130%;
+    animation: statRotate 3s linear infinite;
+    transition: all .2s linear;
+}
+
+@keyframes statRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.stat::after {
+    content: '';
+    position: absolute;
+    background: #0a0d0f;
+    inset: 4px;
+    border-radius: 12px;
+}
+
+.stat strong { position: relative; z-index: 1; display: block; color: var(--gold); font: 700 25px "Space Grotesk", sans-serif; }
+.stat span { position: relative; z-index: 1; color: var(--muted); font-size: 9px; }
 
 
 /* CONNECT */
@@ -1064,14 +1106,7 @@ main { padding-top: 76px; }
         across my CV and project portfolio.
     </p>
 
-    <div class="lang-wallet" id="langWallet">
-        <span class="lang-wallet-label">TOP LANGUAGES</span>
-        <div class="lang-cards" id="langCards"></div>
-    </div>
-
-    <div class="filters" id="skillTabs"></div>
-
-    <div class="skill-list skill-list-active" id="skillPanel"></div>
+    <div class="stack-cards" id="stackCards"></div>
 
 </div>
 </section>
@@ -1215,36 +1250,6 @@ window.addEventListener("load", () => {
 });
 
 
-const topLanguages = [
-    { name: "Java", tag: "01.", note: "Backend & Spring Boot" },
-    { name: "Python", tag: "02.", note: "AI / ML & Data" },
-    { name: "C++", tag: "03.", note: "Systems & Games" },
-    { name: "Solidity", tag: "04.", note: "Blockchain" },
-    { name: "JavaScript", tag: "05.", note: "Frontend & Web" },
-    { name: "C", tag: "06.", note: "Low-Level & Systems" }
-];
-
-const langCardsEl = document.getElementById("langCards");
-if (langCardsEl) {
-    langCardsEl.innerHTML = topLanguages.map(lang => `
-        <div class="lang-card">
-            <div class="lc-content">
-                <div class="lc-top">
-                    <span class="lc-title">${lang.tag}</span>
-                    <p>${lang.name}</p>
-                </div>
-                <div class="lc-bottom">
-                    <p>${lang.note}</p>
-                    <svg width="20" viewBox="0 -960 960 960" height="20" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path></svg>
-                </div>
-            </div>
-            <div class="lc-image">
-                <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path></svg>
-            </div>
-        </div>
-    `).join("");
-}
-
 const skillCategories = [
     { id: "languages", label: "Languages", items: ["Java","Python","C++","C","JavaScript","SQL","Solidity","x86 Assembly","R"] },
     { id: "backend", label: "Backend", items: ["Spring Boot","Spring MVC","Spring Data JPA","Spring WebFlux","R2DBC","REST APIs","JWT","Hibernate"] },
@@ -1256,28 +1261,19 @@ const skillCategories = [
     { id: "other", label: "Other", items: ["Blockchain","Solidity","Networking","Compiler Construction","Concurrency","Algorithms","Data Structures"] }
 ];
 
-const skillTabsEl = document.getElementById("skillTabs");
-const skillPanelEl = document.getElementById("skillPanel");
-
-function renderSkillPanel(catId) {
-    const category = skillCategories.find(c => c.id === catId) || skillCategories[0];
-    skillPanelEl.innerHTML = category.items.map(item => `<span>${item}</span>`).join("");
-}
-
-if (skillTabsEl && skillPanelEl) {
-    skillTabsEl.innerHTML = skillCategories.map((cat, i) =>
-        `<button class="filter${i === 0 ? " active" : ""}" data-skill="${cat.id}">${cat.label}</button>`
-    ).join("");
-
-    skillTabsEl.querySelectorAll(".filter").forEach(button => {
-        button.addEventListener("click", () => {
-            skillTabsEl.querySelectorAll(".filter").forEach(b => b.classList.remove("active"));
-            button.classList.add("active");
-            renderSkillPanel(button.dataset.skill);
-        });
-    });
-
-    renderSkillPanel(skillCategories[0].id);
+const stackCardsEl = document.getElementById("stackCards");
+if (stackCardsEl) {
+    stackCardsEl.innerHTML = skillCategories.map(cat => `
+        <div class="stack-card">
+            <div class="stack-first">
+                <span>${cat.label}</span>
+                <small>${cat.items.length} technologies</small>
+            </div>
+            <div class="stack-second">
+                ${cat.items.map(item => `<span>${item}</span>`).join("")}
+            </div>
+        </div>
+    `).join("");
 }
 
 
