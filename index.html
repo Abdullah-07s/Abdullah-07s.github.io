@@ -269,7 +269,87 @@ button, input { font: inherit; }
 }
 
 
-/* MAIN / PAGE SYSTEM */
+/* CV BUTTON (Uiverse.io by 0xnihilism, adapted) */
+
+.cv-button-container { display: flex; align-items: center; }
+
+.cv-brutalist-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    color: #e5dede;
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #35130f;
+    border: 2px solid #f2b51d;
+    border-radius: 10px;
+    box-shadow: 3px 3px 1px #000000;
+    transition: all .3s cubic-bezier(.25,.8,.25,1);
+}
+
+.cv-brutalist-button:hover {
+    background-color: #5c1a1a;
+    border-color: #030504;
+    transform: translate(-4px, -4px) rotate(1deg);
+    box-shadow: 6px 6px 0 #000000, 10px 10px 14px rgba(66, 196, 152, .25);
+}
+
+.cv-brutalist-button::before,
+.cv-brutalist-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+    transition: .6s;
+}
+
+.cv-brutalist-button::before { left: -100%; }
+.cv-brutalist-button::after { left: 100%; }
+
+.cv-brutalist-button:hover::before { animation: cvSwipeRight 1.5s infinite; }
+.cv-brutalist-button:hover::after { animation: cvSwipeLeft 1.5s infinite; }
+
+@keyframes cvSwipeRight { 100% { transform: translateX(200%) skew(-45deg); } }
+@keyframes cvSwipeLeft { 100% { transform: translateX(-200%) skew(-45deg); } }
+
+.cv-icon-wrap {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: all .3s cubic-bezier(.25,.8,.25,1); z-index: 3;
+}
+
+.cv-page-icon { width: 22px; height: 22px; transition: all .3s cubic-bezier(.25,.8,.25,1); }
+
+.cv-brutalist-button:hover .cv-icon-wrap { transform: translateY(-4px); }
+.cv-brutalist-button:hover .cv-page-icon { width: 18px; height: 18px; }
+
+.cv-label-default, .cv-label-hover {
+    font-size: 9px;
+    letter-spacing: .5px;
+    text-align: center;
+    z-index: 3;
+    transition: all .3s cubic-bezier(.25,.8,.25,1);
+}
+
+.cv-label-hover { opacity: 0; max-height: 0; overflow: hidden; margin-top: 0; }
+.cv-label-default { margin-top: 4px; opacity: 1; max-height: 16px; }
+
+.cv-brutalist-button:hover .cv-label-default { opacity: 0; max-height: 0; }
+.cv-brutalist-button:hover .cv-label-hover { opacity: 1; max-height: 16px; margin-top: 4px; text-shadow: 1px 1px 3px rgba(0,0,0,.4); }
+
+.cv-brutalist-button:active .cv-icon-wrap,
+.cv-brutalist-button:active .cv-label-default,
+.cv-brutalist-button:active .cv-label-hover { transform: scale(.95); }
+
+
+
 
 main { padding-top: 76px; }
 
@@ -791,7 +871,7 @@ main { padding-top: 76px; }
 
 /* ABOUT */
 
-.about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 15px; margin-top: 25px; align-items: start; }
+.about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 15px; margin-top: 25px; align-items: start; }
 
 /* BIO CARD (Uiverse.io by adamgiebl, recolored) */
 
@@ -856,6 +936,14 @@ main { padding-top: 76px; }
 /* CONNECT */
 
 .connect-section { text-align: center; }
+
+#connect.page.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#connect .home-section { margin-top: 0; }
 
 .connect-title {
     margin-top: 10px;
@@ -1084,6 +1172,19 @@ main { padding-top: 76px; }
 </div>
 
 <div class="nav-actions icon-container">
+    <div class="cv-button-container">
+        <a class="cv-brutalist-button" href="CV.pdf" download aria-label="Download CV">
+            <div class="cv-icon-wrap">
+                <svg class="cv-page-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" fill="#0c1013" stroke="#42c498" stroke-width="1.4" stroke-linejoin="round"/>
+                    <path d="M15 2v5h5" fill="none" stroke="#42c498" stroke-width="1.4" stroke-linejoin="round"/>
+                    <path d="M8 13h8M8 16.5h8M8 9.5h4" stroke="#e0524a" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <span class="cv-label-default">CV</span>
+            <span class="cv-label-hover">Download</span>
+        </a>
+    </div>
     <a class="icon icon-github" href="https://github.com/Abdullah-07s" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
@@ -1164,6 +1265,15 @@ main { padding-top: 76px; }
         <div class="about-grid">
 
             <div class="about-card">
+                <div class="stat-grid">
+                    <div class="stat"><strong>26</strong><span>GitHub Projects</span></div>
+                    <div class="stat"><strong>9+</strong><span>Languages</span></div>
+                    <div class="stat"><strong>8+</strong><span>Engineering Areas</span></div>
+                    <div class="stat"><strong>∞</strong><span>Things To Build</span></div>
+                </div>
+            </div>
+
+            <div class="about-card">
                 <p>
                     I'm Abdullah Mallick, a Computer Science
                     student and software engineer focused on
@@ -1183,15 +1293,6 @@ main { padding-top: 76px; }
                     behind it and turning it into something that
                     actually works.
                 </p>
-            </div>
-
-            <div class="about-card">
-                <div class="stat-grid">
-                    <div class="stat"><strong>26</strong><span>GitHub Projects</span></div>
-                    <div class="stat"><strong>9+</strong><span>Languages</span></div>
-                    <div class="stat"><strong>8+</strong><span>Engineering Areas</span></div>
-                    <div class="stat"><strong>∞</strong><span>Things To Build</span></div>
-                </div>
             </div>
 
         </div>
