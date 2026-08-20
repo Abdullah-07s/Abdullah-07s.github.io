@@ -322,6 +322,74 @@ main { padding-top: 76px; }
 .btn:hover { transform: translateY(-3px); border-color: var(--gold-dark); }
 .btn.primary { background: var(--gold); color: #090a08; border-color: var(--gold); }
 
+
+/* GITHUB GLITCH BUTTON (Uiverse.io by namecho, recolored) */
+
+.btn-glitch {
+    padding: 11px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #0c0f11;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+    transition: .25s;
+}
+
+.btn-glitch:hover { transform: translateY(-3px); border-color: var(--gold-dark); }
+
+.btn-glitch .btn-arrow { transition: transform .3s ease; display: inline-flex; }
+.btn-glitch:hover .btn-arrow { transform: rotate(135deg); }
+
+.btn-glitch::after {
+    --slice-0: inset(50% 50% 50% 50%);
+    --slice-1: inset(80% -6px 0 0);
+    --slice-2: inset(50% -6px 30% 0);
+    --slice-3: inset(10% -6px 85% 0);
+    --slice-4: inset(40% -6px 43% 0);
+    --slice-5: inset(80% -6px 5% 0);
+    content: "GitHub ↗";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: absolute;
+    inset: 0;
+    background: #0c0f11;
+    color: var(--gold);
+    text-shadow: -2px -2px 0px var(--cyan), 2px 2px 0px #ff013c;
+    clip-path: var(--slice-0);
+    letter-spacing: 1px;
+    font-size: 11px;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.btn-glitch:hover::after {
+    animation: btnGlitch 1s steps(2, end);
+}
+
+@keyframes btnGlitch {
+    0% { clip-path: var(--slice-1); transform: translate(-6px, -3px); }
+    10% { clip-path: var(--slice-3); transform: translate(4px, 3px); }
+    20% { clip-path: var(--slice-1); transform: translate(-4px, 3px); }
+    30% { clip-path: var(--slice-3); transform: translate(0px, 2px); }
+    40% { clip-path: var(--slice-2); transform: translate(-2px, 0px); }
+    50% { clip-path: var(--slice-3); transform: translate(2px, 0px); }
+    60% { clip-path: var(--slice-4); transform: translate(2px, 3px); }
+    70% { clip-path: var(--slice-2); transform: translate(-4px, 3px); }
+    80% { clip-path: var(--slice-5); transform: translate(6px, -3px); }
+    90% { clip-path: var(--slice-1); transform: translate(-4px, 0px); }
+    100% { clip-path: var(--slice-1); transform: translate(0); }
+}
+
 .terminal {
     background: #030405;
     border: 1px solid #51441f;
@@ -392,9 +460,8 @@ main { padding-top: 76px; }
 
 .glow {
     position: absolute; inset: -2px; border-radius: 12px;
-    filter: blur(18px); opacity: .55;
+    filter: blur(18px); opacity: .3;
     background: conic-gradient(from 90deg at 40% -25%, #f2b51d, #806014, #f2b51d);
-    animation: rotate 5s linear infinite;
     pointer-events: none;
 }
 
@@ -464,12 +531,6 @@ main { padding-top: 76px; }
     margin-left: 10px;
 }
 
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
 /* FILTERS (Uiverse.io by felipesntr, recolored) */
 
 .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
@@ -535,6 +596,7 @@ main { padding-top: 76px; }
 .front .front-content {
     position: absolute; width: 100%; height: 100%; padding: 10px;
     display: flex; flex-direction: column; justify-content: space-between;
+    align-items: center; text-align: center;
 }
 
 .front-content .badge {
@@ -550,10 +612,11 @@ main { padding-top: 76px; }
     background-color: #00000099;
     backdrop-filter: blur(5px);
     border-radius: 5px;
+    text-align: center;
 }
 
-.card-title { font-size: 11px; max-width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 6px; }
-.card-title p { width: 100%; color: white; }
+.card-title { font-size: 11px; max-width: 100%; display: flex; justify-content: center; align-items: center; gap: 6px; }
+.card-title p { width: 100%; color: white; text-align: center; }
 .card-footer { color: #ffffff88; margin-top: 5px; font-size: 8px; }
 
 .front .img { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center; }
@@ -568,15 +631,15 @@ main { padding-top: 76px; }
 
 .logo-blur {
     position: absolute; inset: 0; display: grid; place-items: center;
-    font: 800 46px "Space Grotesk", sans-serif; color: rgba(255,255,255,.5);
-    filter: blur(6px); letter-spacing: 1px; z-index: 0;
+    color: rgba(242,181,29,.35);
+    filter: blur(4px); z-index: 0;
 }
 
 .back-logo {
     width: 46px; height: 46px; border-radius: 50%;
     display: grid; place-items: center;
     background: rgba(242,181,29,.12); border: 1px solid var(--gold-dark);
-    color: var(--gold); font: 700 15px "Space Grotesk", sans-serif;
+    color: var(--gold);
 }
 
 .back-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
@@ -660,7 +723,7 @@ main { padding-top: 76px; }
 }
 
 .stack-first span { color: var(--gold); font: 700 15px "Space Grotesk", sans-serif; letter-spacing: .5px; }
-.stack-first small { color: var(--muted); font: 500 9px "Space Mono", monospace; letter-spacing: 1px; text-transform: uppercase; }
+.stack-first small { color: var(--gold); opacity: .8; font: 700 10px "Space Mono", monospace; letter-spacing: 1px; text-transform: uppercase; }
 
 .stack-card:hover .stack-first { height: 0px; opacity: 0; }
 
@@ -681,17 +744,19 @@ main { padding-top: 76px; }
 
 /* ABOUT */
 
-.about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 15px; margin-top: 25px; }
+.about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 15px; margin-top: 25px; align-items: start; }
+
+/* BIO CARD (Uiverse.io by adamgiebl, recolored) */
 
 .about-card {
     padding: 25px;
     background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 20px;
+    box-shadow: rgba(0,0,0,.5) 0px 30px 50px -12px inset, rgba(242,181,29,.06) 0px 18px 26px -18px inset;
     transition: .3s;
 }
 
-.about-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+.about-card:hover { transform: translateY(-4px); box-shadow: rgba(0,0,0,.55) 0px 30px 50px -12px inset, rgba(242,181,29,.12) 0px 18px 26px -18px inset; }
 .about-card p { color: var(--muted); font-size: 13px; line-height: 1.9; }
 
 .stat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
@@ -808,6 +873,39 @@ main { padding-top: 76px; }
 
 .gnum { position: absolute; right: 9px; bottom: 5px; color: #555d60; font-size: 8px; }
 .input:checked + .gbtn .gnum { color: rgba(8,9,8,.55); }
+
+
+/* NATIVE BRAND COLORS PER CHANNEL */
+
+.gbtn-github::before { background: #f0f6fc; }
+.radio-wrapper:hover .gbtn-github { color: #f0f6fc; border-color: #6e7681; }
+.gbtn-github .gbtn__glitch { color: #f0f6fc; }
+.input:checked + .gbtn-github {
+    background: #24292e; border-color: #444c56; color: #f0f6fc;
+    box-shadow: 0 0 28px rgba(240,246,252,.12);
+}
+.input:checked + .gbtn-github .gbtn__glitch { background: #24292e; color: #f0f6fc; }
+.input:checked + .gbtn-github .gnum { color: rgba(240,246,252,.55); }
+
+.gbtn-linkedin::before { background: #0a66c2; }
+.radio-wrapper:hover .gbtn-linkedin { color: #4da3ff; border-color: #0a66c2; }
+.gbtn-linkedin .gbtn__glitch { color: #4da3ff; }
+.input:checked + .gbtn-linkedin {
+    background: #0a66c2; border-color: #0a66c2; color: #fff;
+    box-shadow: 0 0 28px rgba(10,102,194,.3);
+}
+.input:checked + .gbtn-linkedin .gbtn__glitch { background: #0a66c2; color: #fff; }
+.input:checked + .gbtn-linkedin .gnum { color: rgba(255,255,255,.6); }
+
+.gbtn-email::before { background: #ea4335; }
+.radio-wrapper:hover .gbtn-email { color: #ff8a75; border-color: #ea4335; }
+.gbtn-email .gbtn__glitch { color: #ff8a75; }
+.input:checked + .gbtn-email {
+    background: #ea4335; border-color: #ea4335; color: #fff;
+    box-shadow: 0 0 28px rgba(234,67,53,.3);
+}
+.input:checked + .gbtn-email .gbtn__glitch { background: #ea4335; color: #fff; }
+.input:checked + .gbtn-email .gnum { color: rgba(255,255,255,.6); }
 
 .connect-output {
     max-width: 600px; min-height: 48px; margin: 30px auto 0; padding: 15px;
@@ -926,6 +1024,7 @@ main { padding-top: 76px; }
     <a href="#skills" data-page="skills">Skills</a>
     <a href="#projects" data-page="projects">Projects</a>
     <a href="#experience" data-page="experience">Experience</a>
+    <a href="#connect" data-page="connect">Connect</a>
 </div>
 
 <div class="nav-actions icon-container">
@@ -969,7 +1068,7 @@ main { padding-top: 76px; }
 
             <div class="hero-buttons">
                 <a href="#projects" data-page="projects" class="btn primary">Explore My Work →</a>
-                <a href="https://github.com/Abdullah-07s" target="_blank" class="btn">GitHub ↗</a>
+                <a href="https://github.com/Abdullah-07s" target="_blank" class="btn-glitch">GitHub <span class="btn-arrow">↗</span></a>
             </div>
         </div>
 
@@ -1043,8 +1142,14 @@ main { padding-top: 76px; }
 
     </div>
 
+</div>
+</section>
 
-    <div class="home-section connect-section" id="connect">
+
+<section id="connect" class="page">
+<div class="container">
+
+    <div class="home-section connect-section" id="connectSection">
 
         <div class="section-label">// ESTABLISH CONNECTION</div>
 
@@ -1059,7 +1164,7 @@ main { padding-top: 76px; }
 
             <div class="radio-wrapper">
                 <input class="input" name="btn" id="value-1" type="radio">
-                <div class="gbtn">
+                <div class="gbtn gbtn-github">
                     <span aria-hidden="true">_</span>GitHub
                     <span class="gbtn__glitch" aria-hidden="true">_G_i_t_H_u_b_</span>
                     <label class="gnum">r1</label>
@@ -1068,7 +1173,7 @@ main { padding-top: 76px; }
 
             <div class="radio-wrapper">
                 <input class="input" name="btn" id="value-2" type="radio">
-                <div class="gbtn">
+                <div class="gbtn gbtn-linkedin">
                     _LinkedIn<span aria-hidden="true">_</span>
                     <span class="gbtn__glitch" aria-hidden="true">_L_i_n_k_e_d_I_n_</span>
                     <label class="gnum">r2</label>
@@ -1077,7 +1182,7 @@ main { padding-top: 76px; }
 
             <div class="radio-wrapper">
                 <input class="input" name="btn" id="value-3" type="radio">
-                <div class="gbtn">
+                <div class="gbtn gbtn-email">
                     Email<span aria-hidden="true">_</span>
                     <span class="gbtn__glitch" aria-hidden="true">_E_m_a_i_l_</span>
                     <label class="gnum">r3</label>
@@ -1307,6 +1412,20 @@ const projects = [
 ];
 
 
+const categoryIcons = {
+    ai: '<path d="M12 2a5 5 0 0 0-5 5v1.17A4 4 0 0 0 5 12a4 4 0 0 0 1.06 2.71A4 4 0 0 0 6 15a4 4 0 0 0 4 4h.17A3 3 0 0 0 13 22a3 3 0 0 0 3-3v-.09A4 4 0 0 0 19 15a4 4 0 0 0-.5-1.93A4 4 0 0 0 19 10a4 4 0 0 0-2-3.46V7a5 5 0 0 0-5-5z"/>',
+    backend: '<rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="1"/><circle cx="7" cy="17" r="1"/>',
+    fullstack: '<path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
+    systems: '<rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+    games: '<rect x="2" y="8" width="20" height="9" rx="4"/><path d="M7 10.5v4M5 12.5h4"/><circle cx="16" cy="11" r="1"/><circle cx="18.5" cy="13.5" r="1"/>',
+    data: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>'
+};
+
+function projectIcon(category, size) {
+    const path = categoryIcons[category] || categoryIcons.fullstack;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+}
+
 const projectGrid = document.getElementById("projectGrid");
 const projectSearch = document.getElementById("projectSearch");
 let currentCategory = "all";
@@ -1334,7 +1453,7 @@ function renderProjects() {
             <a class="content" href="https://github.com/Abdullah-07s/${project.repo}" target="_blank" rel="noopener">
                 <div class="back">
                     <div class="back-content">
-                        <div class="back-logo">${project.name.split(" ").map(w => w[0]).join("").slice(0,2).toUpperCase()}</div>
+                        <div class="back-logo">${projectIcon(project.category, 22)}</div>
                         <strong>${project.name}</strong>
                         <p>${project.description}</p>
                         <div class="back-tags">${project.tags.map(t => `<span>${t}</span>`).join("")}</div>
@@ -1342,7 +1461,7 @@ function renderProjects() {
                 </div>
                 <div class="front">
                     <div class="img">
-                        <div class="logo-blur">${project.name.split(" ").map(w => w[0]).join("").slice(0,2).toUpperCase()}</div>
+                        <div class="logo-blur">${projectIcon(project.category, 90)}</div>
                         <div class="circle"></div>
                         <div class="circle right"></div>
                         <div class="circle bottom"></div>
