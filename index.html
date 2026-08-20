@@ -269,84 +269,67 @@ button, input { font: inherit; }
 }
 
 
-/* CV BUTTON (Uiverse.io by 0xnihilism, adapted) */
+/* CV BUTTON */
 
-.cv-button-container { display: flex; align-items: center; }
+.cv-button-container { display: flex; align-items: center; overflow: visible; position: relative; }
 
 .cv-brutalist-button {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
-    color: #e5dede;
-    font-weight: bold;
+    width: 37px;
+    height: 37px;
+    color: #9da4a6;
     text-decoration: none;
     position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    background-color: #35130f;
-    border: 2px solid #f2b51d;
-    border-radius: 10px;
-    box-shadow: 3px 3px 1px #000000;
-    transition: all .3s cubic-bezier(.25,.8,.25,1);
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    transition: border-color .25s, transform .25s, color .25s;
 }
 
 .cv-brutalist-button:hover {
-    background-color: #5c1a1a;
-    border-color: #030504;
-    transform: translate(-4px, -4px) rotate(1deg);
-    box-shadow: 6px 6px 0 #000000, 10px 10px 14px rgba(66, 196, 152, .25);
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+    transform: translateY(-2px);
 }
 
-.cv-brutalist-button::before,
-.cv-brutalist-button::after {
+.cv-page-icon { width: 17px; height: 17px; display: block; shape-rendering: geometricPrecision; }
+
+.cv-label-hover {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    white-space: nowrap;
+    background: #000;
+    border: 1px solid var(--border);
+    color: #f4f3ed;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    padding: 5px 9px;
+    border-radius: 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s;
+    z-index: 10;
+}
+
+.cv-label-hover::before {
     content: "";
     position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
-    transition: .6s;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: #000;
 }
 
-.cv-brutalist-button::before { left: -100%; }
-.cv-brutalist-button::after { left: 100%; }
+.cv-brutalist-button:hover .cv-label-hover { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-.cv-brutalist-button:hover::before { animation: cvSwipeRight 1.5s infinite; }
-.cv-brutalist-button:hover::after { animation: cvSwipeLeft 1.5s infinite; }
 
-@keyframes cvSwipeRight { 100% { transform: translateX(200%) skew(-45deg); } }
-@keyframes cvSwipeLeft { 100% { transform: translateX(-200%) skew(-45deg); } }
-
-.cv-icon-wrap {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    transition: all .3s cubic-bezier(.25,.8,.25,1); z-index: 3;
-}
-
-.cv-page-icon { width: 22px; height: 22px; transition: all .3s cubic-bezier(.25,.8,.25,1); }
-
-.cv-brutalist-button:hover .cv-icon-wrap { transform: translateY(-4px); }
-.cv-brutalist-button:hover .cv-page-icon { width: 18px; height: 18px; }
-
-.cv-label-default, .cv-label-hover {
-    font-size: 9px;
-    letter-spacing: .5px;
-    text-align: center;
-    z-index: 3;
-    transition: all .3s cubic-bezier(.25,.8,.25,1);
-}
-
-.cv-label-hover { opacity: 0; max-height: 0; overflow: hidden; margin-top: 0; }
-.cv-label-default { margin-top: 4px; opacity: 1; max-height: 16px; }
-
-.cv-brutalist-button:hover .cv-label-default { opacity: 0; max-height: 0; }
-.cv-brutalist-button:hover .cv-label-hover { opacity: 1; max-height: 16px; margin-top: 4px; text-shadow: 1px 1px 3px rgba(0,0,0,.4); }
-
-.cv-brutalist-button:active .cv-icon-wrap,
-.cv-brutalist-button:active .cv-label-default,
-.cv-brutalist-button:active .cv-label-hover { transform: scale(.95); }
 
 
 
@@ -727,7 +710,7 @@ main { padding-top: 76px; }
 }
 
 .front-content .badge {
-    background-color: #00000055; color: var(--gold);
+    background-color: #00000055; color: var(--accent, var(--gold));
     padding: 2px 10px; border-radius: 10px;
     backdrop-filter: blur(2px); width: fit-content;
     font-size: 9px; text-transform: uppercase; letter-spacing: .5px;
@@ -750,23 +733,25 @@ main { padding-top: 76px; }
 
 .circle {
     width: 90px; height: 90px; border-radius: 50%;
-    background-color: #f2b51d; position: relative;
+    background-color: var(--accent, #f2b51d); position: relative;
     filter: blur(15px); animation: floating 2600ms infinite linear;
 }
 
-.circle.bottom { background-color: #f2941d; left: 50px; top: 0px; width: 150px; height: 150px; animation-delay: -800ms; }
+.circle.bottom { background-color: var(--accent-dark, #f2941d); left: 50px; top: 0px; width: 150px; height: 150px; animation-delay: -800ms; }
 
 .logo-blur {
     position: absolute; inset: 0; display: grid; place-items: center;
-    color: rgba(242,181,29,.35);
+    color: var(--accent, rgba(242,181,29,.35));
+    opacity: .35;
     filter: blur(4px); z-index: 0;
 }
 
 .back-logo {
     width: 46px; height: 46px; border-radius: 50%;
     display: grid; place-items: center;
-    background: rgba(242,181,29,.12); border: 1px solid var(--gold-dark);
-    color: var(--gold);
+    background: color-mix(in srgb, var(--accent, var(--gold)) 12%, transparent);
+    border: 1px solid var(--accent-dark, var(--gold-dark));
+    color: var(--accent, var(--gold));
 }
 
 .back-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
@@ -775,7 +760,7 @@ main { padding-top: 76px; }
     padding: 3px 7px; background: #0d1114; border: 1px solid #252b2f;
     border-radius: 4px; color: #9ca4a6; font-size: 8px;
 }
-.circle.right { background-color: #ff6b35; left: 160px; top: -80px; width: 30px; height: 30px; animation-delay: -1800ms; }
+.circle.right { background-color: var(--accent-light, #ff6b35); left: 160px; top: -80px; width: 30px; height: 30px; animation-delay: -1800ms; }
 
 @keyframes floating {
     0% { transform: translateY(0px); }
@@ -1172,19 +1157,6 @@ main { padding-top: 76px; }
 </div>
 
 <div class="nav-actions icon-container">
-    <div class="cv-button-container">
-        <a class="cv-brutalist-button" href="CV.pdf" download aria-label="Download CV">
-            <div class="cv-icon-wrap">
-                <svg class="cv-page-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" fill="#0c1013" stroke="#42c498" stroke-width="1.4" stroke-linejoin="round"/>
-                    <path d="M15 2v5h5" fill="none" stroke="#42c498" stroke-width="1.4" stroke-linejoin="round"/>
-                    <path d="M8 13h8M8 16.5h8M8 9.5h4" stroke="#e0524a" stroke-width="1.3" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <span class="cv-label-default">CV</span>
-            <span class="cv-label-hover">Download</span>
-        </a>
-    </div>
     <a class="icon icon-github" href="https://github.com/Abdullah-07s" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
@@ -1195,6 +1167,16 @@ main { padding-top: 76px; }
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
         </svg>
     </a>
+    <div class="cv-button-container">
+        <a class="cv-brutalist-button" href="CV.pdf" download aria-label="Download CV">
+            <svg class="cv-page-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M15 2v5h5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M8 13h8M8 16.5h8M8 9.5h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            <span class="cv-label-hover">Download CV</span>
+        </a>
+    </div>
 </div>
 
 </div>
@@ -1275,7 +1257,7 @@ main { padding-top: 76px; }
 
             <div class="about-card">
                 <p>
-                    I'm Abdullah Manzoor Mallick, a Computer Science
+                    I'm Abdullah Mallick, a Computer Science
                     student and software engineer focused on
                     building practical software and learning
                     through hands-on projects
@@ -1578,6 +1560,15 @@ const categoryIcons = {
     data: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>'
 };
 
+const categoryColors = {
+    ai:        { accent: "#a98cff", dark: "#5f4aa8", light: "#c9b6ff" },
+    backend:   { accent: "#39d9ff", dark: "#1a7a91", light: "#8be9ff" },
+    fullstack: { accent: "#f2b51d", dark: "#806014", light: "#ffd75a" },
+    data:      { accent: "#5ee28c", dark: "#2c8a54", light: "#a3f2c3" },
+    systems:   { accent: "#ff8a3d", dark: "#8a4315", light: "#ffb37a" },
+    games:     { accent: "#ff5d8f", dark: "#8a2b4d", light: "#ff9db8" }
+};
+
 function projectIcon(category, size) {
     const path = categoryIcons[category] || categoryIcons.fullstack;
     return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
@@ -1605,9 +1596,12 @@ function renderProjects() {
         return;
     }
 
-    projectGrid.innerHTML = filtered.map((project) => `
+    projectGrid.innerHTML = filtered.map((project) => {
+        const c = categoryColors[project.category] || categoryColors.fullstack;
+        const style = `--accent:${c.accent};--accent-dark:${c.dark};--accent-light:${c.light};`;
+        return `
         <div class="card">
-            <a class="content" href="https://github.com/Abdullah-07s/${project.repo}" target="_blank" rel="noopener">
+            <a class="content" style="${style}" href="https://github.com/Abdullah-07s/${project.repo}" target="_blank" rel="noopener">
                 <div class="back">
                     <div class="back-content">
                         <div class="back-logo">${projectIcon(project.category, 22)}</div>
@@ -1635,7 +1629,8 @@ function renderProjects() {
                 </div>
             </a>
         </div>
-    `).join("");
+    `;
+    }).join("");
 }
 
 document.querySelectorAll(".filter").forEach(button => {
