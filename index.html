@@ -115,6 +115,67 @@ button, input { font: inherit; }
 }
 
 
+/* PAGE-SWITCH LOADER (Uiverse.io by dexter-st, recolored) */
+
+#pageLoader {
+    position: fixed; inset: 0; z-index: 9998;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(5,6,7,.82); backdrop-filter: blur(3px);
+    opacity: 1; visibility: visible;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+
+#pageLoader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-wrapper {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    width: 130px; height: 130px;
+    font-family: "Space Grotesk", sans-serif; font-size: .95em; font-weight: 500;
+    color: var(--text); border-radius: 50%; background-color: transparent; user-select: none;
+}
+
+.pswitch-loader {
+    position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 1/1;
+    border-radius: 50%; background-color: transparent;
+    animation: loader-rotate 1.6s linear infinite; z-index: 0;
+}
+
+@keyframes loader-rotate {
+    0% {
+        transform: rotate(90deg);
+        box-shadow: 0 10px 20px 0 #fff inset, 0 20px 30px 0 var(--gold-light) inset, 0 60px 60px 0 var(--gold-dark) inset;
+    }
+    50% {
+        transform: rotate(270deg);
+        box-shadow: 0 10px 20px 0 #fff inset, 0 20px 10px 0 var(--cyan) inset, 0 40px 60px 0 var(--purple) inset;
+    }
+    100% {
+        transform: rotate(450deg);
+        box-shadow: 0 10px 20px 0 #fff inset, 0 20px 30px 0 var(--gold-light) inset, 0 60px 60px 0 var(--gold-dark) inset;
+    }
+}
+
+.loader-letter {
+    display: inline-block; opacity: .4; transform: translateY(0);
+    animation: loader-letter-anim 1.6s infinite; z-index: 1;
+    border-radius: 50ch; border: none;
+}
+
+.loader-letter:nth-child(1) { animation-delay: 0s; }
+.loader-letter:nth-child(2) { animation-delay: .08s; }
+.loader-letter:nth-child(3) { animation-delay: .16s; }
+.loader-letter:nth-child(4) { animation-delay: .24s; }
+.loader-letter:nth-child(5) { animation-delay: .32s; }
+.loader-letter:nth-child(6) { animation-delay: .4s; }
+.loader-letter:nth-child(7) { animation-delay: .48s; }
+
+@keyframes loader-letter-anim {
+    0%, 100% { opacity: .4; transform: translateY(0); }
+    20% { opacity: 1; transform: scale(1.15); }
+    40% { opacity: .7; transform: translateY(0); }
+}
+
+
 /* NAVBAR */
 
 .navbar {
@@ -183,6 +244,31 @@ button, input { font: inherit; }
 .social:hover { color: var(--gold); border-color: var(--gold-dark); transform: translateY(-2px); }
 
 
+/* NAV SOCIAL ICONS (Uiverse.io by _7754, recolored) */
+
+.nav-actions.icon-container { column-gap: 12px; }
+
+.icon {
+    display: inline-flex; width: 37px; height: 37px;
+    text-decoration: none; outline: 1px solid var(--border);
+    border-radius: 50%; transition-property: outline-offset, outline-color, background-color;
+    transition-duration: .25s; color: #9da4a6;
+}
+
+.icon:hover { outline-offset: 3px; color: var(--gold); }
+.icon svg { margin: auto; width: 16px; }
+
+.icon-github:hover { background-color: #555555; outline-color: #555555; color: #fff; }
+.icon-in:hover { background-color: #0a66c2; outline-color: #0a66c2; color: #fff; }
+
+.icon:hover svg { animation: iconShake .25s; }
+
+@keyframes iconShake {
+    10% { transform: rotate(15deg); }
+    20% { transform: rotate(-15deg); }
+}
+
+
 /* MAIN / PAGE SYSTEM */
 
 main { padding-top: 76px; }
@@ -199,11 +285,12 @@ main { padding-top: 76px; }
 /* HOME / HERO */
 
 .hero {
-    min-height: 650px;
+    min-height: 560px;
     display: grid;
     grid-template-columns: .9fr 1.1fr;
     align-items: center;
     gap: 60px;
+    margin-top: -30px;
 }
 
 .eyebrow, .section-label { color: var(--gold); font: 600 10px "Space Mono", monospace; letter-spacing: 2px; }
@@ -432,13 +519,6 @@ main { padding-top: 76px; }
 
 .back { justify-content: center; display: flex; align-items: center; overflow: hidden; }
 
-.back::before {
-    position: absolute; content: ' '; display: block;
-    width: 160px; height: 160%;
-    background: linear-gradient(90deg, transparent, #f2b51d, #f2b51d, #f2b51d, #f2b51d, transparent);
-    animation: rotation_481 5000ms infinite linear;
-}
-
 .back-content {
     position: absolute; width: 99%; height: 99%;
     background-color: #151515; border-radius: 5px; color: white;
@@ -449,11 +529,6 @@ main { padding-top: 76px; }
 .back-content p { color: #8f989b; font-size: 10px; line-height: 1.6; }
 
 .card:hover .content { transform: rotateY(180deg); }
-
-@keyframes rotation_481 {
-    0% { transform: rotateZ(0deg); }
-    100% { transform: rotateZ(360deg); }
-}
 
 .front { transform: rotateY(180deg); color: white; }
 
@@ -490,6 +565,26 @@ main { padding-top: 76px; }
 }
 
 .circle.bottom { background-color: #f2941d; left: 50px; top: 0px; width: 150px; height: 150px; animation-delay: -800ms; }
+
+.logo-blur {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font: 800 46px "Space Grotesk", sans-serif; color: rgba(255,255,255,.5);
+    filter: blur(6px); letter-spacing: 1px; z-index: 0;
+}
+
+.back-logo {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(242,181,29,.12); border: 1px solid var(--gold-dark);
+    color: var(--gold); font: 700 15px "Space Grotesk", sans-serif;
+}
+
+.back-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+
+.back-tags span {
+    padding: 3px 7px; background: #0d1114; border: 1px solid #252b2f;
+    border-radius: 4px; color: #9ca4a6; font-size: 8px;
+}
 .circle.right { background-color: #ff6b35; left: 160px; top: -80px; width: 30px; height: 30px; animation-delay: -1800ms; }
 
 @keyframes floating {
@@ -527,6 +622,57 @@ main { padding-top: 76px; }
 }
 
 .skill-list span:hover { color: var(--gold); border-color: var(--gold-dark); transform: translateY(-2px); }
+
+.skill-list-active { margin-top: 24px; min-height: 60px; }
+
+
+/* LANGUAGE CARDS (Uiverse.io by Samalander0, recolored) */
+
+.lang-wallet { margin-top: 34px; }
+
+.lang-wallet-label { color: var(--gold); font: 600 10px "Space Mono", monospace; letter-spacing: 2px; }
+
+.lang-cards {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    margin-top: 14px;
+}
+
+.lang-card {
+    width: 190px;
+    background: var(--card2);
+    color: var(--text);
+    position: relative;
+    border-radius: 1.6em;
+    padding: 1.3em;
+    border: 1px solid var(--border);
+    transition: transform .35s ease, border-color .35s ease;
+}
+
+.lang-card .lc-content {
+    display: flex; flex-direction: column; justify-content: space-between;
+    gap: 3em; height: 100%; transition: transform .35s ease;
+}
+
+.lang-card .lc-top, .lang-card .lc-bottom { display: flex; justify-content: space-between; }
+.lang-card .lc-top p, .lang-card .lc-title, .lang-card .lc-bottom p { margin: 0; }
+.lang-card .lc-title { font-weight: 700; color: var(--gold); font-family: "Space Mono", monospace; font-size: 12px; }
+.lang-card .lc-top p { font-weight: 700; font-family: "Space Grotesk", sans-serif; font-size: 15px; }
+.lang-card .lc-bottom { align-items: flex-end; }
+.lang-card .lc-bottom p { font-weight: 500; font-size: 10px; color: var(--muted); }
+
+.lang-card .lc-image {
+    position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+    display: grid; place-items: center; pointer-events: none; opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.lang-card .lc-image svg { width: 3em; height: 3em; color: var(--gold); transition: transform .4s ease; }
+
+.lang-card:hover { cursor: pointer; border-color: var(--gold-dark); transform: translateY(-4px); }
+.lang-card:hover .lc-content { opacity: .15; transform: scale(.96); }
+.lang-card:hover .lc-image { opacity: 1; }
+.lang-card:hover .lc-image svg { transform: scale(1.1) rotate(-6deg); }
+.lang-card:active { transform: scale(.96); }
 
 
 /* ABOUT */
@@ -664,17 +810,6 @@ main { padding-top: 76px; }
 .pcard-list-item svg { flex-shrink: 0; margin-top: 2px; }
 
 
-/* PAGE INDICATOR */
-
-.page-indicator {
-    position: fixed; right: 22px; bottom: 20px; padding: 7px 10px;
-    background: rgba(8,10,12,.85); border: 1px solid var(--border); border-radius: 5px;
-    color: #687174; font: 8px "Space Mono", monospace; z-index: 500;
-}
-
-.page-indicator span { color: var(--gold); }
-
-
 /* RESPONSIVE */
 
 @media(max-width:1000px) { .hero { grid-template-columns: 1fr; } }
@@ -716,6 +851,20 @@ main { padding-top: 76px; }
 </div>
 
 
+<div id="pageLoader" class="hidden">
+    <div class="loader-wrapper">
+        <span class="loader-letter">L</span>
+        <span class="loader-letter">o</span>
+        <span class="loader-letter">a</span>
+        <span class="loader-letter">d</span>
+        <span class="loader-letter">i</span>
+        <span class="loader-letter">n</span>
+        <span class="loader-letter">g</span>
+        <div class="pswitch-loader"></div>
+    </div>
+</div>
+
+
 <nav class="navbar">
 <div class="container nav-inner">
 
@@ -732,13 +881,22 @@ main { padding-top: 76px; }
 
 <div class="nav-links">
     <a href="#home" data-page="home" class="active">Home</a>
+    <a href="#skills" data-page="skills">Skills</a>
     <a href="#projects" data-page="projects">Projects</a>
     <a href="#experience" data-page="experience">Experience</a>
 </div>
 
-<div class="nav-actions">
-    <a class="social" href="https://github.com/Abdullah-07s" target="_blank">GH</a>
-    <a class="social" href="https://www.linkedin.com/in/abdullah-mallick" target="_blank">in</a>
+<div class="nav-actions icon-container">
+    <a class="icon icon-github" href="https://github.com/Abdullah-07s" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+        </svg>
+    </a>
+    <a class="icon icon-in" href="https://www.linkedin.com/in/abdullah-mallick" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+        </svg>
+    </a>
 </div>
 
 </div>
@@ -756,7 +914,7 @@ main { padding-top: 76px; }
         <div>
             <div class="eyebrow">SOFTWARE ENGINEER / BUILDER</div>
 
-            <h1>Abdullah<br><span>Mallick</span></h1>
+            <h1>Abdullah<br><span>Mallick.</span></h1>
 
             <h2>Backend Engineer <span>•</span> AI/ML <span>•</span> Systems <span>•</span> Full Stack</h2>
 
@@ -796,90 +954,6 @@ main { padding-top: 76px; }
                 <p class="success">Building. Learning. Shipping.</p>
                 <p><span class="cursor"></span></p>
             </div>
-        </div>
-
-    </div>
-
-
-    <div class="home-section" id="skills">
-
-        <div class="section-label">&lt;/&gt; ENGINEERING STACK</div>
-        <h1 class="page-title">Skills &amp; Technologies</h1>
-        <p class="page-description">
-            Technologies and engineering areas represented
-            across my CV and project portfolio.
-        </p>
-
-        <div class="skills-grid">
-
-            <div class="skill-category">
-                <h2>Programming Languages</h2>
-                <div class="skill-list">
-                    <span>Java</span><span>Python</span><span>C++</span>
-                    <span>C</span><span>JavaScript</span><span>SQL</span>
-                    <span>Solidity</span><span>x86 Assembly</span><span>R</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h2>Java / Backend</h2>
-                <div class="skill-list">
-                    <span>Spring Boot</span><span>Spring MVC</span><span>Spring Data JPA</span>
-                    <span>Spring WebFlux</span><span>R2DBC</span><span>REST APIs</span>
-                    <span>JWT</span><span>Hibernate</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h2>Databases</h2>
-                <div class="skill-list">
-                    <span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span>
-                    <span>SQLite</span><span>JPA</span><span>R2DBC</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h2>Frontend</h2>
-                <div class="skill-list">
-                    <span>HTML</span><span>CSS</span><span>JavaScript</span>
-                    <span>React</span><span>Thymeleaf</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h2>AI / Machine Learning</h2>
-                <div class="skill-list">
-                    <span>Machine Learning</span><span>Deep Learning</span><span>RAG</span>
-                    <span>LangChain</span><span>FastAPI</span><span>Embeddings</span>
-                    <span>Vector Search</span><span>ChromaDB</span><span>Bayesian Modeling</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h2>Data / Big Data</h2>
-                <div class="skill-list">
-                    <span>Data Analysis</span><span>Data Processing</span><span>Big Data</span>
-                    <span>Kafka</span><span>Event Streaming</span><span>Distributed Systems</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h2>DevOps / Infrastructure</h2>
-                <div class="skill-list">
-                    <span>Docker</span><span>Git</span><span>GitHub</span>
-                    <span>GitHub Actions</span><span>AWS</span><span>Linux</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <h2>Other Technologies</h2>
-                <div class="skill-list">
-                    <span>Blockchain</span><span>Solidity</span><span>Networking</span>
-                    <span>Compiler Construction</span><span>Concurrency</span>
-                    <span>Algorithms</span><span>Data Structures</span>
-                </div>
-            </div>
-
         </div>
 
     </div>
@@ -975,6 +1049,29 @@ main { padding-top: 76px; }
         </div>
 
     </div>
+
+</div>
+</section>
+
+
+<section id="skills" class="page">
+<div class="container">
+
+    <div class="section-label">&lt;/&gt; ENGINEERING STACK</div>
+    <h1 class="page-title">Skills &amp; Technologies</h1>
+    <p class="page-description">
+        Technologies and engineering areas represented
+        across my CV and project portfolio.
+    </p>
+
+    <div class="lang-wallet" id="langWallet">
+        <span class="lang-wallet-label">TOP LANGUAGES</span>
+        <div class="lang-cards" id="langCards"></div>
+    </div>
+
+    <div class="filters" id="skillTabs"></div>
+
+    <div class="skill-list skill-list-active" id="skillPanel"></div>
 
 </div>
 </section>
@@ -1109,11 +1206,6 @@ main { padding-top: 76px; }
 </main>
 
 
-<div class="page-indicator">
-    PAGE / <span id="pageName">HOME</span>
-</div>
-
-
 <script>
 
 window.addEventListener("load", () => {
@@ -1121,6 +1213,72 @@ window.addEventListener("load", () => {
         document.getElementById("loader-screen").classList.add("hidden");
     }, 900);
 });
+
+
+const topLanguages = [
+    { name: "Java", tag: "01.", note: "Backend & Spring Boot" },
+    { name: "Python", tag: "02.", note: "AI / ML & Data" },
+    { name: "C++", tag: "03.", note: "Systems & Games" },
+    { name: "Solidity", tag: "04.", note: "Blockchain" },
+    { name: "JavaScript", tag: "05.", note: "Frontend & Web" },
+    { name: "C", tag: "06.", note: "Low-Level & Systems" }
+];
+
+const langCardsEl = document.getElementById("langCards");
+if (langCardsEl) {
+    langCardsEl.innerHTML = topLanguages.map(lang => `
+        <div class="lang-card">
+            <div class="lc-content">
+                <div class="lc-top">
+                    <span class="lc-title">${lang.tag}</span>
+                    <p>${lang.name}</p>
+                </div>
+                <div class="lc-bottom">
+                    <p>${lang.note}</p>
+                    <svg width="20" viewBox="0 -960 960 960" height="20" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path></svg>
+                </div>
+            </div>
+            <div class="lc-image">
+                <svg width="48" viewBox="0 -960 960 960" height="48" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="m393-165 279-335H492l36-286-253 366h154l-36 255Zm-73 85 40-280H160l360-520h80l-40 320h240L400-80h-80Zm153-395Z"></path></svg>
+            </div>
+        </div>
+    `).join("");
+}
+
+const skillCategories = [
+    { id: "languages", label: "Languages", items: ["Java","Python","C++","C","JavaScript","SQL","Solidity","x86 Assembly","R"] },
+    { id: "backend", label: "Backend", items: ["Spring Boot","Spring MVC","Spring Data JPA","Spring WebFlux","R2DBC","REST APIs","JWT","Hibernate"] },
+    { id: "databases", label: "Databases", items: ["MySQL","PostgreSQL","MongoDB","SQLite","JPA","R2DBC"] },
+    { id: "frontend", label: "Frontend", items: ["HTML","CSS","JavaScript","React","Thymeleaf"] },
+    { id: "ai", label: "AI / ML", items: ["Machine Learning","Deep Learning","RAG","LangChain","FastAPI","Embeddings","Vector Search","ChromaDB","Bayesian Modeling"] },
+    { id: "data", label: "Data", items: ["Data Analysis","Data Processing","Big Data","Kafka","Event Streaming","Distributed Systems"] },
+    { id: "devops", label: "DevOps", items: ["Docker","Git","GitHub","GitHub Actions","AWS","Linux"] },
+    { id: "other", label: "Other", items: ["Blockchain","Solidity","Networking","Compiler Construction","Concurrency","Algorithms","Data Structures"] }
+];
+
+const skillTabsEl = document.getElementById("skillTabs");
+const skillPanelEl = document.getElementById("skillPanel");
+
+function renderSkillPanel(catId) {
+    const category = skillCategories.find(c => c.id === catId) || skillCategories[0];
+    skillPanelEl.innerHTML = category.items.map(item => `<span>${item}</span>`).join("");
+}
+
+if (skillTabsEl && skillPanelEl) {
+    skillTabsEl.innerHTML = skillCategories.map((cat, i) =>
+        `<button class="filter${i === 0 ? " active" : ""}" data-skill="${cat.id}">${cat.label}</button>`
+    ).join("");
+
+    skillTabsEl.querySelectorAll(".filter").forEach(button => {
+        button.addEventListener("click", () => {
+            skillTabsEl.querySelectorAll(".filter").forEach(b => b.classList.remove("active"));
+            button.classList.add("active");
+            renderSkillPanel(button.dataset.skill);
+        });
+    });
+
+    renderSkillPanel(skillCategories[0].id);
+}
 
 
 const projects = [
@@ -1180,15 +1338,15 @@ function renderProjects() {
             <a class="content" href="https://github.com/Abdullah-07s/${project.repo}" target="_blank" rel="noopener">
                 <div class="back">
                     <div class="back-content">
-                        <svg stroke="#f2b51d" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="40px" width="40px" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path>
-                        </svg>
+                        <div class="back-logo">${project.name.split(" ").map(w => w[0]).join("").slice(0,2).toUpperCase()}</div>
                         <strong>${project.name}</strong>
                         <p>${project.description}</p>
+                        <div class="back-tags">${project.tags.map(t => `<span>${t}</span>`).join("")}</div>
                     </div>
                 </div>
                 <div class="front">
                     <div class="img">
+                        <div class="logo-blur">${project.name.split(" ").map(w => w[0]).join("").slice(0,2).toUpperCase()}</div>
                         <div class="circle"></div>
                         <div class="circle right"></div>
                         <div class="circle bottom"></div>
@@ -1223,23 +1381,34 @@ renderProjects();
 
 const pages = document.querySelectorAll(".page");
 const pageLinks = document.querySelectorAll("[data-page]");
-const pageName = document.getElementById("pageName");
+const pageLoader = document.getElementById("pageLoader");
 
 function showPage(page, updateHash = true) {
     if (!document.getElementById(page)) page = "home";
 
-    pages.forEach(section => section.classList.remove("active"));
-    document.getElementById(page).classList.add("active");
+    const doSwitch = () => {
+        pages.forEach(section => section.classList.remove("active"));
+        document.getElementById(page).classList.add("active");
 
-    pageLinks.forEach(link => {
-        link.classList.toggle("active", link.dataset.page === page);
-    });
+        pageLinks.forEach(link => {
+            link.classList.toggle("active", link.dataset.page === page);
+        });
 
-    pageName.textContent = page.toUpperCase();
+        window.scrollTo({ top: 0, behavior: "smooth" });
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+        if (updateHash) history.replaceState(null, "", "#" + page);
 
-    if (updateHash) history.replaceState(null, "", "#" + page);
+        if (pageLoader) {
+            pageLoader.classList.add("hidden");
+        }
+    };
+
+    if (pageLoader && updateHash) {
+        pageLoader.classList.remove("hidden");
+        setTimeout(doSwitch, 420);
+    } else {
+        doSwitch();
+    }
 }
 
 pageLinks.forEach(link => {
