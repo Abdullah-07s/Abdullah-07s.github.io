@@ -1127,20 +1127,423 @@ main { padding-top: 76px; }
 
 /* RESPONSIVE */
 
-@media(max-width:1000px) { .hero { grid-template-columns: 1fr; } }
+@media(max-width:1000px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 38px;
+    }
+
+    .hero > div:first-child { max-width: 760px; }
+    .terminal { width: 100%; }
+}
+
+/* MOBILE NAV */
+.mobile-menu-toggle, .mobile-nav { display: none; }
 
 @media(max-width:700px) {
-    .container { width: calc(100% - 24px); }
-    .nav-links { display: none; }
-    .hero { min-height: auto; }
-    .hero h1 { font-size: 58px; letter-spacing: -3px; }
-    .skills-grid, .about-grid { grid-template-columns: 1fr; }
-    .page-title { font-size: 34px; }
-    .glitch-group { flex-direction: column; align-items: center; }
-    .page-indicator { display: none; }
+    :root { --radius: 10px; }
+
+    .container { width: min(100% - 28px, 560px); }
+
+    .navbar {
+        height: 64px;
+    }
+
+    .nav-inner {
+        gap: 8px;
+    }
+
+    .logo-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+    }
+
+    .logo-svg { width: 27px; height: 27px; }
     .brand span { display: none; }
-    #poda { max-width: 100%; }
+
+    .nav-links { display: none; }
+
+    .nav-actions.icon-container {
+        margin-left: auto;
+        gap: 6px;
+    }
+
+    .icon, .cv-brutalist-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .icon svg { width: 15px; }
+    .cv-page-icon { width: 15px; height: 15px; }
+
+    .mobile-menu-toggle {
+        order: 5;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 0;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #0a0d0f;
+        color: var(--text);
+        cursor: pointer;
+    }
+
+    .mobile-menu-toggle span {
+        width: 15px;
+        height: 1.5px;
+        background: currentColor;
+        transition: .25s;
+    }
+
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+    .mobile-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 14px;
+        right: 14px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+        padding: 7px;
+        background: rgba(10,13,15,.97);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        box-shadow: 0 18px 45px rgba(0,0,0,.5);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: .25s ease;
+        z-index: 1001;
+    }
+
+    .mobile-nav.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .mobile-nav a {
+        padding: 10px 4px;
+        text-align: center;
+        color: var(--muted);
+        font: 600 9px "Space Grotesk", sans-serif;
+        border-radius: 6px;
+    }
+
+    .mobile-nav a.active, .mobile-nav a:active {
+        background: rgba(242,181,29,.12);
+        color: var(--gold);
+    }
+
+    main { padding-top: 64px; }
+
+    .page {
+        min-height: calc(100vh - 64px);
+        padding: 58px 0;
+    }
+
+    .hero {
+        min-height: auto;
+        margin-top: -12px;
+        gap: 34px;
+    }
+
+    .eyebrow, .section-label {
+        font-size: 9px;
+        letter-spacing: 1.6px;
+    }
+
+    .hero h1 {
+        margin-top: 12px;
+        font-size: clamp(48px, 15vw, 68px);
+        line-height: .94;
+        letter-spacing: -3px;
+    }
+
+    .hero h2 {
+        margin: 18px 0 13px;
+        font-size: 14px;
+        line-height: 1.65;
+    }
+
+    .hero p, .page-description, .connect-description {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .hero-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 22px;
+    }
+
+    .btn-skew, .btn-glitch {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        justify-content: center;
+        font-size: 10px;
+    }
+
+    .terminal {
+        border-radius: 11px;
+        animation: none;
+    }
+
+    .terminal-header {
+        height: 39px;
+        padding: 0 11px;
+    }
+
+    .terminal-header span { width: 8px; height: 8px; }
+    .terminal-header label { font-size: 8px; }
+
+    .terminal-body {
+        min-height: 0;
+        padding: 18px 16px 20px;
+        font-size: 9px;
+        line-height: 1.85;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .home-section { margin-top: 68px; }
+    .page-title {
+        margin-top: 7px;
+        font-size: clamp(30px, 9vw, 38px);
+        line-height: 1.05;
+        letter-spacing: -1.2px;
+    }
+
+    .about-grid, .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .about-card {
+        padding: 17px;
+        border-radius: 14px;
+    }
+
+    .about-card p { font-size: 12px; line-height: 1.8; }
+
+    .stat-grid { gap: 8px; }
+    .stat { padding: 0 13px; border-radius: 12px; }
+    .stat strong { font-size: 21px; }
+    .stat span { font-size: 8.5px; line-height: 1.4; }
+
+    .stack-cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .stack-card {
+        width: 100%;
+        height: auto;
+        min-height: 145px;
+        box-shadow: none;
+        cursor: default;
+    }
+
+    .stack-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .stack-first {
+        height: auto;
+        min-height: 62px;
+        padding: 13px 10px 8px;
+    }
+
+    .stack-first span { font-size: 13px; }
+    .stack-first small { font-size: 8px; }
+
+    .stack-card .stack-second,
+    .stack-card:hover .stack-second {
+        height: auto;
+        min-height: 70px;
+        opacity: 1;
+        transform: none;
+        font-size: 1rem;
+        padding: 8px 9px 13px;
+    }
+
+    .stack-card:hover .stack-first {
+        height: auto;
+        opacity: 1;
+    }
+
+    .stack-second span {
+        padding: 4px 6px;
+        font-size: 8px;
+    }
+
+    #poda {
+        max-width: 100%;
+        margin: 22px auto 13px;
+    }
+
+    #main { height: 46px; padding: 0 10px; }
+    .input { font-size: 11px; padding-left: 4px; }
+    #filter-icon { width: 24px; margin-left: 3px; }
+    #search-icon { width: 20px; margin-left: 5px; }
+    #search-icon svg { width: 20px; }
+    .filterBorder { right: 34px; top: 8px; height: 30px; }
+
+    .filters {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 2px 2px 9px;
+        margin-bottom: 18px;
+        gap: 8px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar { display: none; }
+
+    .filter {
+        flex: 0 0 auto;
+        padding: .55em 1.1em;
+        font-size: .65rem;
+        border-width: 1px;
+        box-shadow: -3px 3px 0 var(--gold);
+    }
+
+    .projects {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+        justify-content: stretch;
+    }
+
+    .card {
+        width: 100%;
+        height: 245px;
+    }
+
+    /* Hover-to-flip cards are difficult to use on touch screens.
+       Show the useful project details directly on mobile. */
+    .card .content, .card:hover .content {
+        transform: none;
+        box-shadow: 0 8px 22px rgba(0,0,0,.45);
+    }
+
+    .card .back {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .card .front {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .back-content {
+        gap: 11px;
+        padding: 12px 10px;
+    }
+
+    .back-content strong {
+        font-size: 11px;
+    }
+
+    .back-content p {
+        font-size: 9px;
+        line-height: 1.55;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .back-tags { gap: 4px; }
+    .back-tags span { font-size: 7px; padding: 3px 5px; }
+    .back-logo { width: 38px; height: 38px; }
+
+    #experience .page-title { margin-bottom: 4px; }
+
+    .experience-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 22px;
+    }
+
+    .pcard {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: .3rem .3rem #05060f;
+    }
+
+    .pcard-role { font-size: 1rem; }
+    .pcard-org { font-size: .76rem; }
+    .pcard-list-item { font-size: 10px; line-height: 1.55; }
+
+    #connect.page.active {
+        min-height: calc(100vh - 64px);
+        align-items: flex-start;
+    }
+
+    .connect-section {
+        width: 100%;
+        padding-top: 12vh;
+    }
+
+    .connect-title {
+        font-size: clamp(36px, 12vw, 52px);
+        letter-spacing: -2px;
+    }
+
+    .glitch-group {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 28px;
+    }
+
+    .radio-wrapper, .radio-wrapper .gbtn {
+        width: 100%;
+        height: 50px;
+    }
+
+    .connect-output {
+        min-height: 50px;
+        margin-top: 22px;
+        padding: 12px;
+        font-size: 8.5px;
+        word-break: break-word;
+    }
 }
+
+@media(max-width:390px) {
+    .container { width: calc(100% - 22px); }
+    .nav-actions.icon-container { gap: 4px; }
+    .icon, .cv-brutalist-button { width: 32px; height: 32px; }
+    .mobile-menu-toggle { width: 35px; height: 35px; flex-basis: 35px; }
+    .projects { gap: 8px; }
+    .card { height: 235px; }
+    .stack-cards { gap: 8px; }
+    .hero-buttons { grid-template-columns: 1fr; }
+}
+
 
 @media(prefers-reduced-motion:reduce) {
     *, *::before, *::after {
@@ -1202,6 +1605,10 @@ main { padding-top: 76px; }
     <a href="#connect" data-page="connect">Connect</a>
 </div>
 
+<button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+</button>
+
 <div class="nav-actions icon-container">
     <a class="icon icon-github" href="https://github.com/Abdullah-07s" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -1223,6 +1630,14 @@ main { padding-top: 76px; }
             <span class="cv-label-hover">Download CV</span>
         </a>
     </div>
+</div>
+
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <a href="#home" data-page="home" class="active">Home</a>
+    <a href="#skills" data-page="skills">Skills</a>
+    <a href="#projects" data-page="projects">Projects</a>
+    <a href="#experience" data-page="experience">Experience</a>
+    <a href="#connect" data-page="connect">Connect</a>
 </div>
 
 </div>
@@ -1731,6 +2146,29 @@ pageLinks.forEach(link => {
         showPage(link.dataset.page);
     });
 });
+
+const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+const mobileNav = document.getElementById("mobileNav");
+
+function closeMobileMenu() {
+    if (!mobileMenuToggle || !mobileNav) return;
+    mobileMenuToggle.setAttribute("aria-expanded", "false");
+    mobileNav.classList.remove("open");
+    mobileNav.setAttribute("aria-hidden", "true");
+}
+
+if (mobileMenuToggle && mobileNav) {
+    mobileMenuToggle.addEventListener("click", () => {
+        const isOpen = mobileMenuToggle.getAttribute("aria-expanded") === "true";
+        mobileMenuToggle.setAttribute("aria-expanded", String(!isOpen));
+        mobileNav.classList.toggle("open", !isOpen);
+        mobileNav.setAttribute("aria-hidden", String(isOpen));
+    });
+
+    mobileNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", closeMobileMenu);
+    });
+}
 
 const initialPage = location.hash.replace("#", "");
 showPage(initialPage && document.getElementById(initialPage) ? initialPage : "home", false);
